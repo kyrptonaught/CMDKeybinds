@@ -16,11 +16,11 @@ public class ConfigOptions {
         private String keyName;
         @Comment("Command to execute")
         public String command;
-        @Comment("Input source -- Keyboard: KEYSYM / Mouse: MOUSE")
-        public InputUtil.Type inputType;
+        @Comment("Input source -- Keyboard: 0 / Mouse: 1")
+        public int inputType;
         private transient int keyCode = -1;
 
-        public MacroKeyBind(String cmd, int keyName, InputUtil.Type type) {
+        public MacroKeyBind(String cmd, int keyName, int type) {
             command = cmd;
             this.inputType = type;
             this.keyName = getName(type, keyName);
@@ -28,10 +28,10 @@ public class ConfigOptions {
         }
 
         public MacroKeyBind() {
-            this("/help", GLFW.GLFW_KEY_F2, InputUtil.Type.KEYSYM);
+            this("/help", GLFW.GLFW_KEY_F2, 0);
         }
 
-        public void updateKey(String key, InputUtil.Type type) {
+        public void updateKey(String key, int type) {
             this.inputType = type;
             this.keyName = key;
             this.keyCode = InputUtil.fromName(keyName).getKeyCode();
@@ -46,8 +46,9 @@ public class ConfigOptions {
             return keyName;
         }
 
-        public static String getName(InputUtil.Type type, int code) {
-            return type.createFromCode(code).getName();
+        public static String getName(int type, int code) {
+            InputUtil.Type temp = type == 0 ? InputUtil.Type.KEYSYM : InputUtil.Type.MOUSE;
+            return temp.createFromCode(code).getName();
         }
     }
 }

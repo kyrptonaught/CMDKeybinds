@@ -16,16 +16,16 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class KeyBindEntry extends TooltipListEntry<Pair<String, InputUtil.Type>> {
+public class KeyBindEntry extends TooltipListEntry<Pair<String, Integer>> {
     private String keyValue;
-    private InputUtil.Type keyType;
+    private int keyType;
     private Boolean isListening = false;
     private ButtonWidget buttonWidget, resetButton;
-    private Consumer<Pair<String, InputUtil.Type>> saveConsumer;
-    private Supplier<Pair<String, InputUtil.Type>> defaultValue;
+    private Consumer<Pair<String, Integer>> saveConsumer;
+    private Supplier<Pair<String, Integer>> defaultValue;
     private List<Element> widgets;
 
-    public KeyBindEntry(String fieldName, String KeyValue, Consumer<Pair<String, InputUtil.Type>> saveConsumer) {
+    public KeyBindEntry(String fieldName, String KeyValue, Consumer<Pair<String, Integer>> saveConsumer) {
         super(fieldName, null, false);
         this.defaultValue = null;
         this.keyValue = KeyValue;
@@ -49,8 +49,8 @@ public class KeyBindEntry extends TooltipListEntry<Pair<String, InputUtil.Type>>
     @Override
     public boolean mouseClicked(double double_1, double double_2, int int_1) {
         if (isListening) {
-            keyValue = ConfigOptions.MacroKeyBind.getName(InputUtil.Type.MOUSE, int_1);
-            keyType = InputUtil.Type.MOUSE;
+            keyValue = ConfigOptions.MacroKeyBind.getName(1, int_1);
+            keyType = 1;
             updateBtnTxt();
             return true;
         } else return super.mouseClicked(double_1, double_2, int_1);
@@ -65,8 +65,8 @@ public class KeyBindEntry extends TooltipListEntry<Pair<String, InputUtil.Type>>
 
     @Override
     public boolean keyPressed(int int_1, int int_2, int int_3) {
-        keyValue = ConfigOptions.MacroKeyBind.getName(InputUtil.Type.KEYSYM, int_1);
-        keyType = InputUtil.Type.KEYSYM;
+        keyValue = ConfigOptions.MacroKeyBind.getName(0, int_1);
+        keyType = 0;
         updateBtnTxt();
         return true;
     }
@@ -95,12 +95,12 @@ public class KeyBindEntry extends TooltipListEntry<Pair<String, InputUtil.Type>>
     }
 
     @Override
-    public Pair<String, InputUtil.Type> getValue() {
+    public Pair<String, Integer> getValue() {
         return Pair.of(keyValue,keyType);
     }
 
     @Override
-    public Optional<Pair<String, InputUtil.Type>> getDefaultValue() {
+    public Optional<Pair<String, Integer>> getDefaultValue() {
         return Optional.empty();
     }
 

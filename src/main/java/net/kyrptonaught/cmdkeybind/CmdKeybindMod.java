@@ -24,12 +24,11 @@ public class CmdKeybindMod implements ModInitializer, ClientModInitializer {
 			if (e.currentScreen == null) {
 				long hndl = MinecraftClient.getInstance().window.getHandle();
 				for (int i = 0; i < options.macros.size(); i++) {
-					if (options.macros.get(i).inputType == InputUtil.Type.MOUSE) {
+					if (options.macros.get(i).inputType == 1) {
 						if (GLFW.glfwGetMouseButton(hndl, options.macros.get(i).getKeyCode()) == 1)
 							e.player.sendChatMessage(options.macros.get(i).command);
 					} else if (GLFW.glfwGetKey(hndl, options.macros.get(i).getKeyCode()) == 1)
 						e.player.sendChatMessage(options.macros.get(i).command);
-					e.player.inventory.getMainHandStack().getEnchantments()
 				}
 			}
 		});
