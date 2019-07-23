@@ -1,10 +1,11 @@
-package net.kyrptonaught.cmdkeybind;
+package net.kyrptonaught.cmdkeybind.config;
 
 import blue.endless.jankson.Jankson;
 import blue.endless.jankson.JsonObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,7 +72,7 @@ public class ConfigManager {
             System.out.println(CmdKeybindMod.config + " Failed to load config! Overwriting with default config.");
             config = new ConfigOptions();
         }
-        if (config.macros.size() == 0) config.macros.add(new ConfigOptions.MacroKeyBind());
+        if (config.macros.size() == 0) config.macros.add(new ConfigOptions.ConfigKeyBind());
         saveConfig();
     }
 }

@@ -1,11 +1,15 @@
 package net.kyrptonaught.cmdkeybind;
 
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
+import net.kyrptonaught.cmdkeybind.config.ConfigManager;
+import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.InputUtil;
-import org.lwjgl.glfw.GLFW;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CmdKeybindMod implements ModInitializer, ClientModInitializer {
 	public static final String MOD_ID = "cmdkeybind";
@@ -18,19 +22,17 @@ public class CmdKeybindMod implements ModInitializer, ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		config.loadConfig();
-		ConfigOptions options = CmdKeybindMod.config.getConfig();
+		ConfigOptions options = config.getConfig();
 		ClientTickCallback.EVENT.register(e ->
 		{
 			if (e.currentScreen == null) {
 				long hndl = MinecraftClient.getInstance().window.getHandle();
-				for (int i = 0; i < options.macros.size(); i++) {
-					if (options.macros.get(i).inputType == 1) {
-						if (GLFW.glfwGetMouseButton(hndl, options.macros.get(i).getKeyCode()) == 1)
-							e.player.sendChatMessage(options.macros.get(i).command);
-					} else if (GLFW.glfwGetKey(hndl, options.macros.get(i).getKeyCode()) == 1)
-						e.player.sendChatMessage(options.macros.get(i).command);
-				}
+				for (int i = 0; i < options.macros.size(); i++)
+					if (options.macros.get(i).isTriggered(hndl))
+						options.macros.get(i).trigger(e.player);
 			}
 		});
 	}
+
+
 }

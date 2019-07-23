@@ -14,6 +14,12 @@
   "license": "MIT",
   "icon": "assets/cmdkeybind/icon.png",
   "environment": "*",
+  "mixins": [
+    {
+      "config": "net.kyrptonaught.cmdkeybind.json",
+      "environment": "client"
+    }
+  ],
   "entrypoints": {
     "main": [
       "net.kyrptonaught.cmdkeybind.CmdKeybindMod"
@@ -23,7 +29,7 @@
     ],
 
     "modmenu": [
-      "net.kyrptonaught.cmdkeybind.ModMenuIntegration"
+      "net.kyrptonaught.cmdkeybind.config.ModMenuIntegration"
     ]
 
   },

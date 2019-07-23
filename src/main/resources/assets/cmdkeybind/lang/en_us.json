@@ -5,6 +5,7 @@
   "key.cmdkeybind.config.macro.key": "Key",
   "key.cmdkeybind.config.macro.command": "Command",
   "key.cmdkeybind.config.enabled": "Enabled",
-  "key.cmdkeybind.config.numMacros": "Number of Macros",
+  "key.cmdkeybind.config.add": "Add",
+  "key.cmdkeybind.config.remove": "Remove",
   "key.categories.cmdkeybind" : "Macros"
 }

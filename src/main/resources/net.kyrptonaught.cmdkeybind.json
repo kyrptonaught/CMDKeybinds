@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.kyrptonaught.cmdkeybind.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinClothConfigScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
