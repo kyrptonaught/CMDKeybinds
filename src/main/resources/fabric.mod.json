@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.0.0b2",
+  "version": "1.0.0b3",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
     "kyrptonaught"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/modded-tool-tips",
-    "sources": "https://github.com/kyrptonaught/modnametooltips"
+    "homepage": "https://github.com/kyrptonaught/CMDKeybinds",
+    "sources": "https://github.com/kyrptonaught/CMDKeybinds"
   },
   "license": "MIT",
   "icon": "assets/cmdkeybind/icon.png",
@@ -27,11 +27,9 @@
     "client": [
       "net.kyrptonaught.cmdkeybind.CmdKeybindMod"
     ],
-
     "modmenu": [
       "net.kyrptonaught.cmdkeybind.config.ModMenuIntegration"
     ]
-
   },
   "requires": {
     "fabricloader": ">=0.4.0",

@@ -7,5 +7,5 @@
   "key.cmdkeybind.config.enabled": "Enabled",
   "key.cmdkeybind.config.add": "Add",
   "key.cmdkeybind.config.remove": "Remove",
-  "key.categories.cmdkeybind" : "Macros"
+  "key.categories.cmdkeybind": "Macros"
 }
