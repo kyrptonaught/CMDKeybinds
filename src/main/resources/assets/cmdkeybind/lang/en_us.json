@@ -6,6 +6,6 @@
   "key.cmdkeybind.config.macro.command": "Command",
   "key.cmdkeybind.config.enabled": "Enabled",
   "key.cmdkeybind.config.add": "Add",
-  "key.cmdkeybind.config.remove": "Remove",
+  "key.cmdkeybind.config.remove": "Delete",
   "key.categories.cmdkeybind": "Macros"
 }

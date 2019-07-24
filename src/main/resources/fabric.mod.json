@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.0.0b3",
+  "version": "1.0.0",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
@@ -21,9 +21,6 @@
     }
   ],
   "entrypoints": {
-    "main": [
-      "net.kyrptonaught.cmdkeybind.CmdKeybindMod"
-    ],
     "client": [
       "net.kyrptonaught.cmdkeybind.CmdKeybindMod"
     ],
