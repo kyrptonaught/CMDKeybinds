@@ -66,7 +66,9 @@ public class ConfigManager {
             System.out.println(CmdKeybindMod.MOD_ID + " Failed to load config! Overwriting with default config.");
             config = new ConfigOptions();
         }
-        if (config.macros.size() == 0) config.macros.add(new ConfigOptions.ConfigKeyBind());
+        if (config.macros.size() == 0) {
+            CmdKeybindMod.addEmptyMacro();
+        }
         saveConfig();
     }
 }

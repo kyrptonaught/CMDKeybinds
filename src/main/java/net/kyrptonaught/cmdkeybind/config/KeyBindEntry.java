@@ -6,7 +6,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.Window;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +25,7 @@ public class KeyBindEntry extends TooltipListEntry<String> {
 
     public KeyBindEntry(String fieldName, String KeyValue, Consumer<String> saveConsumer) {
         super(fieldName, null, false);
-        this.defaultValue = null;
+        this.defaultValue = () -> InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_O).getName();
         this.keyValue = KeyValue;
         this.buttonWidget = new ButtonWidget(0, 0, 150, 20, getCleanName(keyValue), widget -> {
             if (isListening)
@@ -32,6 +34,8 @@ public class KeyBindEntry extends TooltipListEntry<String> {
             isListening = !isListening;
         });
         this.resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getStringWidth(I18n.translate("text.cloth-config.reset_value")) + 6, 20, I18n.translate("text.cloth-config.reset_value"), widget -> {
+            keyValue = defaultValue.get();
+            buttonWidget.setMessage(getCleanName(keyValue));
             getScreen().setEdited(true, isRequiresRestart());
         });
         this.saveConsumer = saveConsumer;
@@ -45,7 +49,7 @@ public class KeyBindEntry extends TooltipListEntry<String> {
     @Override
     public boolean mouseClicked(double double_1, double double_2, int int_1) {
         if (isListening) {
-            keyValue = ConfigOptions.ConfigKeyBind.getName(1, int_1);
+            keyValue = InputUtil.Type.MOUSE.createFromCode(int_1).getName();
             updateBtnTxt();
             return true;
         } else return super.mouseClicked(double_1, double_2, int_1);
@@ -60,7 +64,7 @@ public class KeyBindEntry extends TooltipListEntry<String> {
 
     @Override
     public boolean keyPressed(int int_1, int int_2, int int_3) {
-        keyValue = ConfigOptions.ConfigKeyBind.getName(0, int_1);
+        keyValue = InputUtil.Type.KEYSYM.createFromCode(int_1).getName();
         updateBtnTxt();
         return true;
     }
@@ -69,7 +73,7 @@ public class KeyBindEntry extends TooltipListEntry<String> {
     public void render(int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isSelected, float delta) {
         super.render(index, y, x, entryWidth, entryHeight, mouseX, mouseY, isSelected, delta);
         Window window = MinecraftClient.getInstance().window;
-        //this.resetButton.active = isEditable() && getDefaultValue().isPresent() && defaultValue.get().booleanValue() != bool.get();
+        this.resetButton.active = isEditable() && getDefaultValue().isPresent() && defaultValue.get() != keyValue;
         this.resetButton.y = y;
         this.buttonWidget.active = isEditable();
         this.buttonWidget.y = y;
@@ -95,7 +99,7 @@ public class KeyBindEntry extends TooltipListEntry<String> {
 
     @Override
     public Optional<String> getDefaultValue() {
-        return Optional.empty();
+        return Optional.ofNullable(defaultValue.get());
     }
 
     @Override

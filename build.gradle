@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.4-SNAPSHOT'
+	id 'fabric-loom' version '0.2.5-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -21,7 +21,7 @@ dependencies {
 
 	modImplementation "io.github.prospector.modmenu:ModMenu:1.+"
 
-	modImplementation 'me.shedaniel.cloth:config-2:0.+'
+	modImplementation ('me.shedaniel.cloth:config-2:0.+'){transitive = false}
 	include 'me.shedaniel.cloth:config-2:0.+'
 
 	modApi "blue.endless:jankson:1.+"
