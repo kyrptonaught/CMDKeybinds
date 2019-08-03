@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "icon": "assets/cmdkeybind/icon.png",
-  "environment": "*",
+  "environment": "client",
   "mixins": [
     {
       "config": "net.kyrptonaught.cmdkeybind.json",
@@ -32,7 +32,7 @@
     "fabricloader": ">=0.4.0",
     "fabric": "*"
   },
-  "suggests": {
-    "flamingo": "*"
+  "custom": {
+    "modmenu:clientsideOnly": true
   }
 }

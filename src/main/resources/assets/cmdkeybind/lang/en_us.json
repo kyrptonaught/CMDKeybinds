@@ -5,9 +5,9 @@
   "key.cmdkeybind.config.macro.key": "Key",
   "key.cmdkeybind.config.macro.command": "Command",
   "key.cmdkeybind.config.enabled": "Enabled",
-  "key.cmdkeybind.config.globalDelay": "Global Delay",
-  "key.cmdkeybind.config.delay": "Delay (-1 to bypass delay)",
+  "key.cmdkeybind.config.macrotype": "Type of Macro",
+  "key.cmdkeybind.config.delay": "Delay (Ignore for Single/Display)",
   "key.cmdkeybind.config.add": "Add",
-  "key.cmdkeybind.config.remove": "Delete",
+  "key.cmdkeybind.config.remove": "Remove",
   "key.categories.cmdkeybind": "Macros"
 }

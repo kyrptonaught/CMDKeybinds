@@ -2,6 +2,7 @@ package net.kyrptonaught.cmdkeybind;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
+import net.kyrptonaught.cmdkeybind.MacroTypes.*;
 import net.kyrptonaught.cmdkeybind.config.ConfigManager;
 import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
 import net.minecraft.client.MinecraftClient;
@@ -18,16 +19,15 @@ public class CmdKeybindMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         config.loadConfig();
+        if (config.getConfig().macros.size() == 0) addEmptyMacro();
         buildMacros();
         ClientTickCallback.EVENT.register(e ->
         {
             if (e.currentScreen == null) {
                 long hndl = MinecraftClient.getInstance().window.getHandle();
+                long curTime = System.currentTimeMillis();
                 for (Macro macro : macros)
-                    if (macro.isTriggered(hndl)) {
-                        if (macro.canExecute())
-                            macro.execute(e.player);
-                    } else macro.resetTimer();
+                    macro.tick(hndl, e.player, curTime);
             }
         });
     }
@@ -37,7 +37,21 @@ public class CmdKeybindMod implements ClientModInitializer {
         ConfigOptions options = config.getConfig();
         if (options.enabled)
             for (ConfigOptions.ConfigMacro macro : options.macros) {
-                macros.add(new Macro(macro.keyName, macro.command, macro.delay == -1 ? 0 : macro.delay + options.globalDelay));
+                if(macro.macroType == null)macro.macroType = Macro.MacroType.SingleUse;
+                switch (macro.macroType) {
+                    case Delayed:
+                        macros.add(new DelayedMacro(macro.keyName, macro.command, macro.delay));
+                        break;
+                    case Repeating:
+                        macros.add(new RepeatingMacro(macro.keyName, macro.command, macro.delay));
+                        break;
+                    case SingleUse:
+                        macros.add(new SingleMacro(macro.keyName, macro.command));
+                        break;
+                    case DisplayOnly:
+                        macros.add(new DisplayMacro(macro.keyName, macro.command));
+                        break;
+                }
             }
     }
 
