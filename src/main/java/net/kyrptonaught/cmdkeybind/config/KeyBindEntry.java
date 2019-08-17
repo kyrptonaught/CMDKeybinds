@@ -25,7 +25,7 @@ public class KeyBindEntry extends TooltipListEntry<String> {
 
     public KeyBindEntry(String fieldName, String KeyValue, Consumer<String> saveConsumer) {
         super(fieldName, null, false);
-        this.defaultValue = () -> InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_O).getName();
+        this.defaultValue = () -> InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_KP_0).getName();
         this.keyValue = KeyValue;
         this.buttonWidget = new ButtonWidget(0, 0, 150, 20, getCleanName(keyValue), widget -> {
             if (isListening)

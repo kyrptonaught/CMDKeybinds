@@ -35,5 +35,4 @@ public abstract class MixinClothConfigScreen implements ClothConfigInterface {
     @Shadow
     public void onSave(Map<String, List<Pair<String, Object>>> o) {
     }
-
 }

@@ -1,7 +1,7 @@
 package net.kyrptonaught.cmdkeybind.config;
 
 import blue.endless.jankson.Comment;
-import net.kyrptonaught.cmdkeybind.MacroTypes.Macro;
+import net.kyrptonaught.cmdkeybind.MacroTypes.BaseMacro;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
@@ -20,7 +20,7 @@ public class ConfigOptions {
         @Comment("Command to execute")
         public String command;
         @Comment("Type of Macro. Delayed, Repeating, SingleUse, DisplayOnly")
-        public Macro.MacroType macroType;
+        public BaseMacro.MacroType macroType;
         @Comment("Delay(Milliseconds) used for the delay type.")
         public int delay;
 
@@ -28,7 +28,7 @@ public class ConfigOptions {
         public ConfigMacro() {
             this.keyName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_KP_0).getName();
             this.command = "/say Command Macros!";
-            macroType = Macro.MacroType.SingleUse;
+            macroType = BaseMacro.MacroType.SingleUse;
             this.delay = 0;
         }
     }

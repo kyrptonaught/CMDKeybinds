@@ -14,7 +14,7 @@ public class CmdKeybindMod implements ClientModInitializer {
     public static final String MOD_ID = "cmdkeybind";
     public static ConfigManager config = new ConfigManager();
 
-    public static List<Macro> macros = new ArrayList<>();
+    public static List<BaseMacro> macros = new ArrayList<>();
 
     @Override
     public void onInitializeClient() {
@@ -26,10 +26,11 @@ public class CmdKeybindMod implements ClientModInitializer {
             if (e.currentScreen == null) {
                 long hndl = MinecraftClient.getInstance().window.getHandle();
                 long curTime = System.currentTimeMillis();
-                for (Macro macro : macros)
+                for (BaseMacro macro : macros)
                     macro.tick(hndl, e.player, curTime);
             }
         });
+
     }
 
     public static void buildMacros() {
@@ -37,7 +38,7 @@ public class CmdKeybindMod implements ClientModInitializer {
         ConfigOptions options = config.getConfig();
         if (options.enabled)
             for (ConfigOptions.ConfigMacro macro : options.macros) {
-                if(macro.macroType == null)macro.macroType = Macro.MacroType.SingleUse;
+                if (macro.macroType == null) macro.macroType = BaseMacro.MacroType.SingleUse;
                 switch (macro.macroType) {
                     case Delayed:
                         macros.add(new DelayedMacro(macro.keyName, macro.command, macro.delay));

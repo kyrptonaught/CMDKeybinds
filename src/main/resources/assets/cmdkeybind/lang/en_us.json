@@ -7,7 +7,7 @@
   "key.cmdkeybind.config.enabled": "Enabled",
   "key.cmdkeybind.config.macrotype": "Type of Macro",
   "key.cmdkeybind.config.delay": "Delay (Ignore for Single/Display)",
-  "key.cmdkeybind.config.add": "Add",
+  "key.cmdkeybind.config.add": "Add Macro",
   "key.cmdkeybind.config.remove": "Remove",
   "key.categories.cmdkeybind": "Macros"
 }

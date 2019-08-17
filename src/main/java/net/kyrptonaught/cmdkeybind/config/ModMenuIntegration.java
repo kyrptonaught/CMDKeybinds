@@ -8,7 +8,7 @@ import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
-import net.kyrptonaught.cmdkeybind.MacroTypes.Macro;
+import net.kyrptonaught.cmdkeybind.MacroTypes.BaseMacro;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 
@@ -29,7 +29,7 @@ public class ModMenuIntegration implements ModMenuApi {
         return Optional.of(() -> buildScreen(screen));
     }
 
-    public static Screen buildScreen(Screen screen) {
+    private static Screen buildScreen(Screen screen) {
         ConfigOptions options = CmdKeybindMod.config.getConfig();
         ConfigBuilder builder = ConfigBuilder.create().setParentScreen(screen).setTitle("Macros");
 
@@ -40,22 +40,22 @@ public class ModMenuIntegration implements ModMenuApi {
         ConfigCategory category = builder.getOrCreateCategory("key.cmdkeybind.config.category.main");
         ConfigEntryBuilder entryBuilder = ConfigEntryBuilder.create();
         category.addEntry(entryBuilder.startBooleanToggle("key.cmdkeybind.config.enabled", options.enabled).setDefaultValue(true).setSaveConsumer(val -> options.enabled = val).build());
-        for (int i = 0; i < options.macros.size(); i++)
-            category.addEntry(buildNewMacro(builder, entryBuilder, i).build());
         category.addEntry(new ButtonEntry("key.cmdkeybind.config.add", buttonEntry -> {
             ((ClothConfigInterface) MinecraftClient.getInstance().currentScreen).cmd_save();
             CmdKeybindMod.addEmptyMacro();
             MinecraftClient.getInstance().openScreen(ModMenuIntegration.buildScreen(builder.getParentScreen()));
         }));
+        for (int i = 0; i < options.macros.size(); i++)
+            category.addEntry(buildNewMacro(builder, entryBuilder, i).build());
         return builder.build();
     }
 
     private static SubCategoryBuilder buildNewMacro(ConfigBuilder builder, ConfigEntryBuilder entryBuilder, int macroNum) {
         ConfigOptions.ConfigMacro macro = CmdKeybindMod.config.config.macros.get(macroNum);
         SubCategoryBuilder sub = entryBuilder.startSubCategory("key.cmdkeybind.config.sub.macro").setTooltip(macro.command);
-        sub.add(entryBuilder.startTextField("key.cmdkeybind.config.macro.command", macro.command).setDefaultValue("/help").setSaveConsumer(cmd -> macro.command = cmd).build());
+        sub.add(entryBuilder.startTextField("key.cmdkeybind.config.macro.command", macro.command).setDefaultValue("/say Command Macros!").setSaveConsumer(cmd -> macro.command = cmd).build());
         sub.add(new KeyBindEntry("key.cmdkeybind.config.macro.key", macro.keyName, key -> macro.keyName = key));
-        sub.add(entryBuilder.startEnumSelector("key.cmdkeybind.config.macrotype", Macro.MacroType.class, macro.macroType).setSaveConsumer(val -> macro.macroType = val).build());
+        sub.add(entryBuilder.startEnumSelector("key.cmdkeybind.config.macrotype", BaseMacro.MacroType.class, macro.macroType).setSaveConsumer(val -> macro.macroType = val).build());
         sub.add(entryBuilder.startIntField("key.cmdkeybind.config.delay", macro.delay).setDefaultValue(0).setSaveConsumer(val -> macro.delay = val).build());
         sub.add(new ButtonEntry("key.cmdkeybind.config.remove", buttonEntry -> {
             ((ClothConfigInterface) MinecraftClient.getInstance().currentScreen).cmd_save();

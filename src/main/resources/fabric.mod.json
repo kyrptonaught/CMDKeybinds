@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
@@ -28,7 +28,7 @@
       "net.kyrptonaught.cmdkeybind.config.ModMenuIntegration"
     ]
   },
-  "requires": {
+  "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
   },

@@ -3,7 +3,7 @@ package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 
-public class SingleMacro extends Macro {
+public class SingleMacro extends BaseMacro {
     private boolean keyWasPressed;
 
     public SingleMacro(String key, String command) {

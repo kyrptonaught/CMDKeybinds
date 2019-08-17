@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 
-public class DisplayMacro extends Macro {
+public class DisplayMacro extends BaseMacro {
     public DisplayMacro(String key, String command) {
         super(key, command);
     }

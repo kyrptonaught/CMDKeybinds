@@ -2,7 +2,7 @@ package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 
-public class DelayedMacro extends Macro {
+public class DelayedMacro extends BaseMacro {
     private int delay;
     private long sysTimePressed = 0;
     private long currentTime;
