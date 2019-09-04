@@ -5,8 +5,8 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 
 public class DisplayMacro extends BaseMacro {
-    public DisplayMacro(String key, String command) {
-        super(key, command);
+    public DisplayMacro(String key,String keyMod, String command) {
+        super(key,keyMod, command);
     }
 
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {

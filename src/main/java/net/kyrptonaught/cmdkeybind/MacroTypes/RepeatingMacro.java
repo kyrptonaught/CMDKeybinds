@@ -7,8 +7,8 @@ public class RepeatingMacro extends BaseMacro {
     private long sysTimePressed = 0;
     private long currentTime;
 
-    public RepeatingMacro(String key, String command, int delay) {
-        super(key, command);
+    public RepeatingMacro(String key,String keyMod, String command, int delay) {
+        super(key,keyMod, command);
         this.delay = delay;
     }
 

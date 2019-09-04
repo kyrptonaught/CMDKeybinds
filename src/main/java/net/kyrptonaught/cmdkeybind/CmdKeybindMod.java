@@ -41,16 +41,16 @@ public class CmdKeybindMod implements ClientModInitializer {
                 if (macro.macroType == null) macro.macroType = BaseMacro.MacroType.SingleUse;
                 switch (macro.macroType) {
                     case Delayed:
-                        macros.add(new DelayedMacro(macro.keyName, macro.command, macro.delay));
+                        macros.add(new DelayedMacro(macro.keyName, macro.keyModName, macro.command, macro.delay));
                         break;
                     case Repeating:
-                        macros.add(new RepeatingMacro(macro.keyName, macro.command, macro.delay));
+                        macros.add(new RepeatingMacro(macro.keyName, macro.keyModName, macro.command, macro.delay));
                         break;
                     case SingleUse:
-                        macros.add(new SingleMacro(macro.keyName, macro.command));
+                        macros.add(new SingleMacro(macro.keyName, macro.keyModName, macro.command));
                         break;
                     case DisplayOnly:
-                        macros.add(new DisplayMacro(macro.keyName, macro.command));
+                        macros.add(new DisplayMacro(macro.keyName, macro.keyModName, macro.command));
                         break;
                 }
             }

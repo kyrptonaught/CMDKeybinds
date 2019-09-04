@@ -6,8 +6,8 @@ import net.minecraft.client.network.ClientPlayerEntity;
 public class SingleMacro extends BaseMacro {
     private boolean keyWasPressed;
 
-    public SingleMacro(String key, String command) {
-        super(key, command);
+    public SingleMacro(String key, String keyMod, String command) {
+        super(key, keyMod, command);
     }
 
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {

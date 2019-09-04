@@ -11,6 +11,7 @@ import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
 import net.kyrptonaught.cmdkeybind.MacroTypes.BaseMacro;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -55,6 +56,7 @@ public class ModMenuIntegration implements ModMenuApi {
         SubCategoryBuilder sub = entryBuilder.startSubCategory("key.cmdkeybind.config.sub.macro").setTooltip(macro.command);
         sub.add(entryBuilder.startTextField("key.cmdkeybind.config.macro.command", macro.command).setDefaultValue("/say Command Macros!").setSaveConsumer(cmd -> macro.command = cmd).build());
         sub.add(new KeyBindEntry("key.cmdkeybind.config.macro.key", macro.keyName, key -> macro.keyName = key));
+        sub.add(new KeyBindEntry("key.cmdkeybind.config.macro.keymod", macro.keyModName, key -> macro.keyModName = key, GLFW.GLFW_KEY_UNKNOWN));
         sub.add(entryBuilder.startEnumSelector("key.cmdkeybind.config.macrotype", BaseMacro.MacroType.class, macro.macroType).setSaveConsumer(val -> macro.macroType = val).build());
         sub.add(entryBuilder.startIntField("key.cmdkeybind.config.delay", macro.delay).setDefaultValue(0).setSaveConsumer(val -> macro.delay = val).build());
         sub.add(new ButtonEntry("key.cmdkeybind.config.remove", buttonEntry -> {

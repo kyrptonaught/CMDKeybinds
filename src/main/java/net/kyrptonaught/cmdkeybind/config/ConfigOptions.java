@@ -17,6 +17,8 @@ public class ConfigOptions {
     public static class ConfigMacro {
         @Comment("Macro keybinding")
         public String keyName;
+        @Comment("Key modifier")
+        public String keyModName;
         @Comment("Command to execute")
         public String command;
         @Comment("Type of Macro. Delayed, Repeating, SingleUse, DisplayOnly")
@@ -27,6 +29,7 @@ public class ConfigOptions {
 
         public ConfigMacro() {
             this.keyName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_KP_0).getName();
+            this.keyModName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_UNKNOWN).getName();
             this.command = "/say Command Macros!";
             macroType = BaseMacro.MacroType.SingleUse;
             this.delay = 0;

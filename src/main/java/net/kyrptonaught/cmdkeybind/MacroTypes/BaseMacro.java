@@ -10,11 +10,12 @@ public abstract class BaseMacro {
         Delayed, Repeating, SingleUse, DisplayOnly
     }
 
-    private InputUtil.KeyCode keyCode;
+    private InputUtil.KeyCode keyCode, keyMod;
     protected String command;
 
-    public BaseMacro(String key, String command) {
+    BaseMacro(String key, String keyMod, String command) {
         this.keyCode = InputUtil.fromName(key);
+        this.keyMod = InputUtil.fromName(keyMod);
         this.command = command;
 
     }
@@ -23,8 +24,15 @@ public abstract class BaseMacro {
     }
 
     boolean isTriggered(long hndl) {
+        boolean modTriggered = true;
+        if (keyMod.getKeyCode() != -1) {
+            if (keyMod.getCategory() == InputUtil.Type.MOUSE)
+                modTriggered = GLFW.glfwGetMouseButton(hndl, keyMod.getKeyCode()) == 1;
+            else modTriggered = GLFW.glfwGetKey(hndl, keyMod.getKeyCode()) == 1;
+        }
+
         if (keyCode.getCategory() == InputUtil.Type.MOUSE)
-            return GLFW.glfwGetMouseButton(hndl, keyCode.getKeyCode()) == 1;
-        return GLFW.glfwGetKey(hndl, keyCode.getKeyCode()) == 1;
+            return modTriggered && GLFW.glfwGetMouseButton(hndl, keyCode.getKeyCode()) == 1;
+        return modTriggered && GLFW.glfwGetKey(hndl, keyCode.getKeyCode()) == 1;
     }
 }

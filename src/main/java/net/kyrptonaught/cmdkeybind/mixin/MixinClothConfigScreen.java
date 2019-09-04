@@ -23,12 +23,15 @@ public abstract class MixinClothConfigScreen implements ClothConfigInterface {
     public void cmd_save() {
         Map<String, List<Pair<String, Object>>> map = Maps.newLinkedHashMap();
         tabbedEntries.forEach((s, abstractListEntries) -> {
-            List list = abstractListEntries.stream().map(entry -> new Pair(entry.getFieldName(), entry.getValue())).collect(Collectors.toList());
+            List list = abstractListEntries.stream().map((entry) -> new Pair(entry.getFieldName(), entry.getValue())).collect(Collectors.toList());
             map.put(s, list);
         });
-        for (List<AbstractConfigEntry> entries : Lists.newArrayList(tabbedEntries.values()))
-            for (AbstractConfigEntry entry : entries)
+        for (List<AbstractConfigEntry> abstractConfigEntries : Lists.newArrayList(tabbedEntries.values())) {
+            for (Object o : abstractConfigEntries) {
+                AbstractConfigEntry entry = (AbstractConfigEntry) o;
                 entry.save();
+            }
+        }
         onSave(map);
     }
 

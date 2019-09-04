@@ -41,7 +41,10 @@ public class KeyBindEntry extends TooltipListEntry<String> {
         this.saveConsumer = saveConsumer;
         this.widgets = Lists.newArrayList(buttonWidget, resetButton);
     }
-
+    public KeyBindEntry(String fieldName, String KeyValue, Consumer<String> saveConsumer, int defaultKey) {
+        this(fieldName, KeyValue, saveConsumer);
+        this.defaultValue = () -> InputUtil.Type.KEYSYM.createFromCode(defaultKey).getName();
+    }
     public String getCleanName(String str) {
         return str.replace("key.", "");
     }

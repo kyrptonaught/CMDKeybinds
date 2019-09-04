@@ -7,8 +7,8 @@ public class DelayedMacro extends BaseMacro {
     private long sysTimePressed = 0;
     private long currentTime;
 
-    public DelayedMacro(String key, String command, int delay) {
-        super(key, command);
+    public DelayedMacro(String key, String keyMod, String command, int delay) {
+        super(key,keyMod, command);
         this.delay = delay;
     }
 
