@@ -3,7 +3,7 @@
   "key.cmdkeybind.config.category.macros": "Macros",
   "key.cmdkeybind.config.sub.macro": "Macro",
   "key.cmdkeybind.config.macro.key": "Key",
-  "key.cmdkeybind.config.macro.keymod": "Modifyer Key",
+  "key.cmdkeybind.config.macro.keymod": "Modifier Key",
   "key.cmdkeybind.config.macro.command": "Command",
   "key.cmdkeybind.config.enabled": "Enabled",
   "key.cmdkeybind.config.macrotype": "Type of Macro",

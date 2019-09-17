@@ -1,4 +1,4 @@
-package net.kyrptonaught.cmdkeybind.config;
+package net.kyrptonaught.cmdkeybind.config.clothconfig;
 
 
 public interface ClothConfigInterface {

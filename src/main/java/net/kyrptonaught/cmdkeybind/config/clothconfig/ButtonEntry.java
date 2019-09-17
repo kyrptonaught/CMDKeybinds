@@ -1,4 +1,4 @@
-package net.kyrptonaught.cmdkeybind.config;
+package net.kyrptonaught.cmdkeybind.config.clothconfig;
 
 import com.google.common.collect.Lists;
 import me.shedaniel.clothconfig2.gui.entries.TooltipListEntry;
