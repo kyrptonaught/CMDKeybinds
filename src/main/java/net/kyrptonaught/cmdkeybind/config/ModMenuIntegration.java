@@ -4,13 +4,13 @@ import io.github.prospector.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.gui.ClothConfigScreen;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
 import net.kyrptonaught.cmdkeybind.MacroTypes.BaseMacro;
 import net.kyrptonaught.cmdkeybind.config.clothconfig.ButtonEntry;
-import net.kyrptonaught.cmdkeybind.config.clothconfig.ClothConfigInterface;
 import net.kyrptonaught.cmdkeybind.config.clothconfig.KeyBindEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
@@ -49,9 +49,8 @@ public class ModMenuIntegration implements ModMenuApi {
         for (int i = 0; i < options.macros.size(); i++)
             macroCat.addEntry(buildNewMacro(builder, entryBuilder, i).build());
         macroCat.addEntry(new ButtonEntry("key.cmdkeybind.config.add", buttonEntry -> {
-            ((ClothConfigInterface) MinecraftClient.getInstance().currentScreen).cmd_save();
             CmdKeybindMod.addEmptyMacro();
-            MinecraftClient.getInstance().openScreen(ModMenuIntegration.buildScreen(builder.getParentScreen()));
+           reloadScreen(builder);
         }));
         return builder.build();
     }
@@ -65,11 +64,15 @@ public class ModMenuIntegration implements ModMenuApi {
         sub.add(entryBuilder.startEnumSelector("key.cmdkeybind.config.macrotype", BaseMacro.MacroType.class, macro.macroType).setSaveConsumer(val -> macro.macroType = val).build());
         sub.add(entryBuilder.startIntField("key.cmdkeybind.config.delay", macro.delay).setDefaultValue(0).setSaveConsumer(val -> macro.delay = val).build());
         sub.add(new ButtonEntry("key.cmdkeybind.config.remove", buttonEntry -> {
-            ((ClothConfigInterface) MinecraftClient.getInstance().currentScreen).cmd_save();
             CmdKeybindMod.config.config.macros.remove(macroNum);
-            builder.getSavingRunnable().run();
-            MinecraftClient.getInstance().openScreen(ModMenuIntegration.buildScreen(builder.getParentScreen()));
+            reloadScreen(builder);
         }));
         return sub;
+    }
+    private static void reloadScreen(ConfigBuilder builder){
+        builder.getSavingRunnable().run();
+        ((ClothConfigScreen)MinecraftClient.getInstance().currentScreen).saveAll(false);
+        MinecraftClient.getInstance().openScreen(buildScreen(builder.getParentScreen()));
+       // ((ClothConfigScreen)MinecraftClient.getInstance().currentScreen).selectedTabIndex = 1;
     }
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
@@ -14,12 +14,6 @@
   "license": "MIT",
   "icon": "assets/cmdkeybind/icon.png",
   "environment": "client",
-  "mixins": [
-    {
-      "config": "net.kyrptonaught.cmdkeybind.json",
-      "environment": "client"
-    }
-  ],
   "entrypoints": {
     "client": [
       "net.kyrptonaught.cmdkeybind.CmdKeybindMod"

@@ -21,8 +21,8 @@ dependencies {
 
 	modImplementation "io.github.prospector.modmenu:ModMenu:+"
 
-	modImplementation ('me.shedaniel.cloth:config-2:+'){transitive = false}
-	include 'me.shedaniel.cloth:config-2:+'
+	modImplementation ('me.shedaniel.cloth:config-2:1.8'){transitive = false}
+	include 'me.shedaniel.cloth:config-2:1.8'
 
 	modApi "blue.endless:jankson:+"
 	include "blue.endless:jankson:+"
