@@ -1,6 +1,5 @@
 {
   "key.cmdkeybind.config.category.main": "Main",
-  "key.cmdkeybind.config.category.macros": "Macros",
   "key.cmdkeybind.config.sub.macro": "Macro",
   "key.cmdkeybind.config.macro.key": "Key",
   "key.cmdkeybind.config.macro.keymod": "Modifier Key",

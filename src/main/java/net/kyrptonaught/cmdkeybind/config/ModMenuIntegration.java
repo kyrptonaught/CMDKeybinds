@@ -45,12 +45,11 @@ public class ModMenuIntegration implements ModMenuApi {
         ConfigEntryBuilder entryBuilder = ConfigEntryBuilder.create();
         category.addEntry(entryBuilder.startBooleanToggle("key.cmdkeybind.config.enabled", options.enabled).setDefaultValue(true).setSaveConsumer(val -> options.enabled = val).build());
 
-        ConfigCategory macroCat = builder.getOrCreateCategory("key.cmdkeybind.config.category.macros");
         for (int i = 0; i < options.macros.size(); i++)
-            macroCat.addEntry(buildNewMacro(builder, entryBuilder, i).build());
-        macroCat.addEntry(new ButtonEntry("key.cmdkeybind.config.add", buttonEntry -> {
+            category.addEntry(buildNewMacro(builder, entryBuilder, i).build());
+        category.addEntry(new ButtonEntry("key.cmdkeybind.config.add", buttonEntry -> {
             CmdKeybindMod.addEmptyMacro();
-           reloadScreen(builder);
+            reloadScreen(builder);
         }));
         return builder.build();
     }
@@ -69,10 +68,10 @@ public class ModMenuIntegration implements ModMenuApi {
         }));
         return sub;
     }
-    private static void reloadScreen(ConfigBuilder builder){
+
+    private static void reloadScreen(ConfigBuilder builder) {
         builder.getSavingRunnable().run();
-        ((ClothConfigScreen)MinecraftClient.getInstance().currentScreen).saveAll(false);
+        ((ClothConfigScreen) MinecraftClient.getInstance().currentScreen).saveAll(false);
         MinecraftClient.getInstance().openScreen(buildScreen(builder.getParentScreen()));
-       // ((ClothConfigScreen)MinecraftClient.getInstance().currentScreen).selectedTabIndex = 1;
     }
 }
