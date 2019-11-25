@@ -32,7 +32,7 @@ public class ButtonEntry extends TooltipListEntry<String> {
     @Override
     public void render(int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isSelected, float delta) {
         super.render(index, y, x, entryWidth, entryHeight, mouseX, mouseY, isSelected, delta);
-        Window window = MinecraftClient.getInstance().window;
+        Window window = MinecraftClient.getInstance().getWindow();
         this.buttonWidget.active = isEditable();
         this.buttonWidget.y = y;
 
