@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
     "kyrptonaught"
   ],
   "contact": {
-    "homepage": "https://github.com/kyrptonaught/CMDKeybinds",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/command-macros",
     "sources": "https://github.com/kyrptonaught/CMDKeybinds"
   },
   "license": "MIT",
