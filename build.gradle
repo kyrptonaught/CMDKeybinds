@@ -13,7 +13,8 @@ group = project.maven_group
 minecraft {
 }
 repositories {
-	maven { url 'https://maven.fabricmc.net/io/github/prospector/modmenu/ModMenu/' }
+	maven { url 'https://maven.fabricmc.net' }
+	maven { url 'https://jitpack.io' }
 }
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -22,8 +23,9 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "io.github.prospector:modmenu:+"
+	//modImplementation "me.shedaniel:RoughlyEnoughItems:+"
 
-	modImplementation ('me.shedaniel.cloth:config-2:+'){transitive = false}
+	modImplementation('me.shedaniel.cloth:config-2:+')
 	include 'me.shedaniel.cloth:config-2:+'
 
 	modApi "blue.endless:jankson:+"
