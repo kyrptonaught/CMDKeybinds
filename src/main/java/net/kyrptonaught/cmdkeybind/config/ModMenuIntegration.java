@@ -34,11 +34,11 @@ public class ModMenuIntegration implements ModMenuApi {
     }
 
     private static Screen buildScreen(Screen screen) {
-        ConfigOptions options = CmdKeybindMod.config.getConfig();
+        ConfigOptions options = CmdKeybindMod.getConfig();
         ConfigBuilder builder = ConfigBuilder.create().setParentScreen(screen).setTitle("Macros");
 
         builder.setSavingRunnable(() -> {
-            CmdKeybindMod.config.saveConfig();
+            CmdKeybindMod.config.saveAll();
             CmdKeybindMod.buildMacros();
         });
         ConfigCategory category = builder.getOrCreateCategory("key.cmdkeybind.config.category.main");
@@ -55,7 +55,7 @@ public class ModMenuIntegration implements ModMenuApi {
     }
 
     private static SubCategoryBuilder buildNewMacro(ConfigBuilder builder, ConfigEntryBuilder entryBuilder, int macroNum) {
-        ConfigOptions.ConfigMacro macro = CmdKeybindMod.config.config.macros.get(macroNum);
+        ConfigOptions.ConfigMacro macro = CmdKeybindMod.getConfig().macros.get(macroNum);
         SubCategoryBuilder sub = entryBuilder.startSubCategory(macro.command).setTooltip(macro.keyName);
         sub.add(entryBuilder.startTextField("key.cmdkeybind.config.macro.command", macro.command).setDefaultValue("/").setSaveConsumer(cmd -> macro.command = cmd).build());
         sub.add(entryBuilder.startKeyCodeField("key.cmdkeybind.config.macro.key", InputUtil.fromName(macro.keyName)).setSaveConsumer(key -> macro.keyName = key.getName()).build());
@@ -63,7 +63,7 @@ public class ModMenuIntegration implements ModMenuApi {
         sub.add(entryBuilder.startEnumSelector("key.cmdkeybind.config.macrotype", BaseMacro.MacroType.class, macro.macroType).setSaveConsumer(val -> macro.macroType = val).build());
         sub.add(entryBuilder.startIntField("key.cmdkeybind.config.delay", macro.delay).setDefaultValue(0).setSaveConsumer(val -> macro.delay = val).build());
         sub.add(new ButtonEntry("key.cmdkeybind.config.remove", buttonEntry -> {
-            CmdKeybindMod.config.config.macros.remove(macroNum);
+            CmdKeybindMod.getConfig().macros.remove(macroNum);
             reloadScreen(builder);
         }));
         return sub;

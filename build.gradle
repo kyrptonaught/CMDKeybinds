@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'fabric-loom' version '0.2.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -14,7 +14,11 @@ minecraft {
 }
 repositories {
 	maven { url 'https://maven.fabricmc.net' }
-	maven { url 'https://jitpack.io' }
+	maven {url 'https://dl.bintray.com/kyrptonaught/kyrptconfig'}
+	maven {
+		name = 'CottonMC'
+		url = 'https://server.bbkr.space/artifactory/libs-release'
+	}
 }
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -22,11 +26,11 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "io.github.prospector:modmenu:+"
-	//modImplementation "me.shedaniel:RoughlyEnoughItems:+"
+	modImplementation 'net.kyrptonaught:kyrptconfig:1.0.1'
+	include 'net.kyrptonaught:kyrptconfig:1.0.1'
 
-	modImplementation('me.shedaniel.cloth:config-2:+')
-	include 'me.shedaniel.cloth:config-2:+'
+	modImplementation "io.github.cottonmc:cotton-client-commands:1.0.0+1.15.2"
+	include "io.github.cottonmc:cotton-client-commands:1.0.0+1.15.2"
 
 	modApi "blue.endless:jankson:+"
 	include "blue.endless:jankson:+"

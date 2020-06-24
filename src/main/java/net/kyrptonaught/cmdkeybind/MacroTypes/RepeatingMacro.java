@@ -33,8 +33,8 @@ public class RepeatingMacro extends BaseMacro {
         return true;
     }
 
-    private void execute(ClientPlayerEntity player) {
+    protected void execute(ClientPlayerEntity player) {
         sysTimePressed = currentTime;
-        player.sendChatMessage(this.command);
+       super.execute(player);
     }
 }

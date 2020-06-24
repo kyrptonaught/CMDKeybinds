@@ -3,8 +3,9 @@ package net.kyrptonaught.cmdkeybind;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.kyrptonaught.cmdkeybind.MacroTypes.*;
-import net.kyrptonaught.cmdkeybind.config.ConfigManager;
 import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
+import net.kyrptonaught.cmdkeybind.scripting.ScriptingEngine;
+import net.kyrptonaught.kyrptconfig.config.ConfigManager;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
@@ -12,14 +13,15 @@ import java.util.List;
 
 public class CmdKeybindMod implements ClientModInitializer {
     public static final String MOD_ID = "cmdkeybind";
-    public static ConfigManager config = new ConfigManager();
+    public static ConfigManager config = new ConfigManager.SingleConfigManager(MOD_ID);
 
     public static List<BaseMacro> macros = new ArrayList<>();
 
     @Override
     public void onInitializeClient() {
-        config.loadConfig();
-        if (config.getConfig().macros.size() == 0) addEmptyMacro();
+        config.registerFile(MOD_ID + "config.json5", new ConfigOptions());
+        config.loadAll();
+        if (getConfig().macros.size() == 0) addEmptyMacro();
         buildMacros();
         ClientTickCallback.EVENT.register(e ->
         {
@@ -30,12 +32,16 @@ public class CmdKeybindMod implements ClientModInitializer {
                     macro.tick(hndl, e.player, curTime);
             }
         });
+        ScriptingEngine.init();
+    }
 
+    public static ConfigOptions getConfig() {
+        return (ConfigOptions) config.getConfig(MOD_ID + "config.json5");
     }
 
     public static void buildMacros() {
         macros.clear();
-        ConfigOptions options = config.getConfig();
+        ConfigOptions options = getConfig();
         if (options.enabled)
             for (ConfigOptions.ConfigMacro macro : options.macros) {
                 if (macro.macroType == null) macro.macroType = BaseMacro.MacroType.SingleUse;
@@ -57,8 +63,8 @@ public class CmdKeybindMod implements ClientModInitializer {
     }
 
     public static void addEmptyMacro() {
-        config.getConfig().macros.add(new ConfigOptions.ConfigMacro());
+        getConfig().macros.add(new ConfigOptions.ConfigMacro());
         buildMacros();
-        config.saveConfig();
+        config.saveAll();
     }
 }

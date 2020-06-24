@@ -15,7 +15,7 @@ public class DisplayMacro extends BaseMacro {
         }
     }
 
-    private void execute(ClientPlayerEntity player) {
+    protected void execute(ClientPlayerEntity player) {
         MinecraftClient.getInstance().openScreen(new ChatScreen(this.command));
     }
 }

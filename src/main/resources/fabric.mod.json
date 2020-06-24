@@ -20,6 +20,9 @@
     ],
     "modmenu": [
       "net.kyrptonaught.cmdkeybind.config.ModMenuIntegration"
+    ],
+    "cotton-client-commands": [
+      "net.kyrptonaught.cmdkeybind.ClientCommands"
     ]
   },
   "depends": {

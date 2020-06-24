@@ -1,6 +1,7 @@
 package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 
+import net.kyrptonaught.cmdkeybind.scripting.ScriptingEngine;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -34,5 +35,10 @@ public abstract class BaseMacro {
         if (keyCode.getCategory() == InputUtil.Type.MOUSE)
             return modTriggered && GLFW.glfwGetMouseButton(hndl, keyCode.getKeyCode()) == 1;
         return modTriggered && GLFW.glfwGetKey(hndl, keyCode.getKeyCode()) == 1;
+    }
+    protected void execute(ClientPlayerEntity player) {
+        if(command.startsWith("/script"))
+            ScriptingEngine.run(command.substring("/script".length()));
+        else player.sendChatMessage(this.command);
     }
 }
