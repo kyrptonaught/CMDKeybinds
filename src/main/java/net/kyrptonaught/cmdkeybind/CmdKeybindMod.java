@@ -12,14 +12,14 @@ import java.util.List;
 
 public class CmdKeybindMod implements ClientModInitializer {
     public static final String MOD_ID = "cmdkeybind";
-    public static ConfigManager config = new ConfigManager.SingleConfigManager(MOD_ID);
+    public static ConfigManager.SingleConfigManager config = new ConfigManager.SingleConfigManager(MOD_ID, new ConfigOptions());
 
     public static List<BaseMacro> macros = new ArrayList<>();
 
     @Override
     public void onInitializeClient() {
-        config.registerFile(MOD_ID + "config.json5", new ConfigOptions());
-        config.loadAll();
+
+        config.load();
         if (getConfig().macros.size() == 0) addEmptyMacro();
         buildMacros();
         ClientTickCallback.EVENT.register(e ->
@@ -34,7 +34,7 @@ public class CmdKeybindMod implements ClientModInitializer {
     }
 
     public static ConfigOptions getConfig() {
-        return (ConfigOptions) config.getConfig(MOD_ID + "config.json5");
+        return (ConfigOptions) config.getConfig();
     }
 
     public static void buildMacros() {
@@ -63,6 +63,6 @@ public class CmdKeybindMod implements ClientModInitializer {
     public static void addEmptyMacro() {
         getConfig().macros.add(new ConfigOptions.ConfigMacro());
         buildMacros();
-        config.saveAll();
+        config.save();
     }
 }

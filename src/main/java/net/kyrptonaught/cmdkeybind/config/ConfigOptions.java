@@ -29,8 +29,8 @@ public class ConfigOptions implements AbstractConfigFile {
 
 
         public ConfigMacro() {
-            this.keyName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_KP_0).getName();
-            this.keyModName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_UNKNOWN).getName();
+            this.keyName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_KP_0).getTranslationKey();
+            this.keyModName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_UNKNOWN).getTranslationKey();
             this.command = "/say Command Macros!";
             macroType = BaseMacro.MacroType.SingleUse;
             this.delay = 0;

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.4.2",
+  "version": "1.4.3-1.16",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
