@@ -8,7 +8,7 @@ public class DelayedMacro extends BaseMacro {
     private long currentTime;
 
     public DelayedMacro(String key, String keyMod, String command, int delay) {
-        super(key,keyMod, command);
+        super(key, keyMod, command);
         this.delay = delay;
     }
 
@@ -40,8 +40,8 @@ public class DelayedMacro extends BaseMacro {
         return false;
     }
 
-    private void execute(ClientPlayerEntity player) {
+    protected void execute(ClientPlayerEntity player) {
         sysTimePressed = 0;
-        player.sendChatMessage(this.command);
+        super.execute(player);
     }
 }

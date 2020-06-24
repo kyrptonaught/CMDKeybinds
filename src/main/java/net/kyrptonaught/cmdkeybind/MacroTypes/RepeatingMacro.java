@@ -7,8 +7,8 @@ public class RepeatingMacro extends BaseMacro {
     private long sysTimePressed = 0;
     private long currentTime;
 
-    public RepeatingMacro(String key,String keyMod, String command, int delay) {
-        super(key,keyMod, command);
+    public RepeatingMacro(String key, String keyMod, String command, int delay) {
+        super(key, keyMod, command);
         this.delay = delay;
     }
 
@@ -33,8 +33,8 @@ public class RepeatingMacro extends BaseMacro {
         return true;
     }
 
-    private void execute(ClientPlayerEntity player) {
+    protected void execute(ClientPlayerEntity player) {
         sysTimePressed = currentTime;
-        player.sendChatMessage(this.command);
+        super.execute(player);
     }
 }

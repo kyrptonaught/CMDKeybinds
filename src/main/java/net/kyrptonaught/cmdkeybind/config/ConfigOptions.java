@@ -2,13 +2,14 @@ package net.kyrptonaught.cmdkeybind.config;
 
 import blue.endless.jankson.Comment;
 import net.kyrptonaught.cmdkeybind.MacroTypes.BaseMacro;
+import net.kyrptonaught.kyrptconfig.config.AbstractConfigFile;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigOptions {
+public class ConfigOptions implements AbstractConfigFile {
 
     public boolean enabled = true;
 

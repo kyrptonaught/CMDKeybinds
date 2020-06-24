@@ -17,8 +17,8 @@ public class SingleMacro extends BaseMacro {
         } else keyWasPressed = false;
     }
 
-    private void execute(ClientPlayerEntity player) {
+    protected void execute(ClientPlayerEntity player) {
         keyWasPressed = true;
-        player.sendChatMessage(this.command);
+        super.execute(player);
     }
 }
