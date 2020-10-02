@@ -1,0 +1,13 @@
+{
+  "key.cmdkeybind.config.category.main": "Principal",
+  "key.cmdkeybind.config.sub.macro": "Macro",
+  "key.cmdkeybind.config.macro.key": "Chave",
+  "key.cmdkeybind.config.macro.keymod": "Chave modificadora",
+  "key.cmdkeybind.config.macro.command": "Comando",
+  "key.cmdkeybind.config.enabled": "Habilitar",
+  "key.cmdkeybind.config.macrotype": "Tipo de Macro",
+  "key.cmdkeybind.config.delay": "Atraso (Ignrado para Single/Display)",
+  "key.cmdkeybind.config.add": "Adicionar Macro",
+  "key.cmdkeybind.config.remove": "Remover",
+  "key.categories.cmdkeybind": "Macros"
+}
