@@ -1,6 +1,7 @@
 package net.kyrptonaught.cmdkeybind;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.kyrptonaught.cmdkeybind.MacroTypes.*;
 import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
@@ -22,14 +23,13 @@ public class CmdKeybindMod implements ClientModInitializer {
         config.load();
         if (getConfig().macros.size() == 0) addEmptyMacro();
         buildMacros();
-        ClientTickCallback.EVENT.register(e ->
+        ClientTickEvents.START_WORLD_TICK.register(clientWorld ->
         {
-            if (e.currentScreen == null) {
-                long hndl = MinecraftClient.getInstance().getWindow().getHandle();
-                long curTime = System.currentTimeMillis();
-                for (BaseMacro macro : macros)
-                    macro.tick(hndl, e.player, curTime);
-            }
+            long hndl = MinecraftClient.getInstance().getWindow().getHandle();
+            long curTime = System.currentTimeMillis();
+            for (BaseMacro macro : macros)
+                macro.tick(hndl, MinecraftClient.getInstance().player, curTime);
+
         });
     }
 
@@ -55,6 +55,9 @@ public class CmdKeybindMod implements ClientModInitializer {
                         break;
                     case DisplayOnly:
                         macros.add(new DisplayMacro(macro.keyName, macro.keyModName, macro.command));
+                        break;
+                    case ToggledRepeating:
+                        macros.add(new ToggledRepeating(macro.keyName, macro.keyModName, macro.command, macro.delay));
                         break;
                 }
             }

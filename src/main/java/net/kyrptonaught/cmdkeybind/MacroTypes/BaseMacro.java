@@ -1,12 +1,13 @@
 package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 public abstract class BaseMacro {
     public enum MacroType {
-        Delayed, Repeating, SingleUse, DisplayOnly
+        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating
     }
 
     private InputUtil.Key keyCode, keyMod;
