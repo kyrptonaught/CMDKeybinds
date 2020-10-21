@@ -25,11 +25,12 @@ public class CmdKeybindMod implements ClientModInitializer {
         buildMacros();
         ClientTickEvents.START_WORLD_TICK.register(clientWorld ->
         {
-            long hndl = MinecraftClient.getInstance().getWindow().getHandle();
-            long curTime = System.currentTimeMillis();
-            for (BaseMacro macro : macros)
-                macro.tick(hndl, MinecraftClient.getInstance().player, curTime);
-
+            if (MinecraftClient.getInstance().currentScreen == null) {
+                long hndl = MinecraftClient.getInstance().getWindow().getHandle();
+                long curTime = System.currentTimeMillis();
+                for (BaseMacro macro : macros)
+                    macro.tick(hndl, MinecraftClient.getInstance().player, curTime);
+            }
         });
     }
 
