@@ -10,7 +10,7 @@ public class ToggledRepeating extends RepeatingMacro {
 
     boolean prevTriggered = false;
 
-    boolean isTriggered(long hndl) {
+    protected boolean isTriggered(long hndl) {
         boolean isTriggered = super.isTriggered(hndl);
         if (prevTriggered && !isTriggered) toggledOn = !toggledOn;
         prevTriggered = isTriggered;

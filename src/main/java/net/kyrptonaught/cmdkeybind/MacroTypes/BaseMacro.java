@@ -1,7 +1,7 @@
 package net.kyrptonaught.cmdkeybind.MacroTypes;
 
+import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
@@ -10,12 +10,12 @@ public abstract class BaseMacro {
         Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating
     }
 
-    private InputUtil.Key keyCode, keyMod;
+    private InputUtil.Key primaryKey, modifierKey;
     protected String command;
 
     BaseMacro(String key, String keyMod, String command) {
-        this.keyCode = InputUtil.fromTranslationKey(key);
-        this.keyMod = InputUtil.fromTranslationKey(keyMod);
+        this.primaryKey = InputUtil.fromTranslationKey(key);
+        this.modifierKey = InputUtil.fromTranslationKey(keyMod);
         this.command = command;
 
     }
@@ -23,20 +23,40 @@ public abstract class BaseMacro {
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {
     }
 
-    boolean isTriggered(long hndl) {
-        boolean modTriggered = true;
-        if (keyMod.getCode() != -1) {
-            if (keyMod.getCategory() == InputUtil.Type.MOUSE)
-                modTriggered = GLFW.glfwGetMouseButton(hndl, keyMod.getCode()) == 1;
-            else modTriggered = GLFW.glfwGetKey(hndl, keyMod.getCode()) == 1;
-        }
+    public boolean isDupeKeyModPressed(long hndl, InputUtil.Key testKey) {
+        if (modifierKey.getCode() == -1) return false;
+        if (testKey.getCode() == primaryKey.getCode())
+            return isKeyTriggered(hndl, modifierKey);
+        if (testKey.getCode() == modifierKey.getCode())
+            return isKeyTriggered(hndl, primaryKey);
+        return false;
+    }
 
-        if (keyCode.getCategory() == InputUtil.Type.MOUSE)
-            return modTriggered && GLFW.glfwGetMouseButton(hndl, keyCode.getCode()) == 1;
-        return modTriggered && GLFW.glfwGetKey(hndl, keyCode.getCode()) == 1;
+    private boolean findDupesWModPress(long hndl) {
+        for (BaseMacro macro : CmdKeybindMod.macros)
+            if (macro.isDupeKeyModPressed(hndl, primaryKey))
+                return true;
+        return false;
+    }
+
+    protected boolean isTriggered(long hndl) {
+        if (isKeyTriggered(hndl, primaryKey)) {
+            if (modifierKey.getCode() != -1)
+                return isKeyTriggered(hndl, modifierKey);
+            else {
+                return !findDupesWModPress(hndl);
+            }
+        }
+        return false;
     }
 
     protected void execute(ClientPlayerEntity player) {
         player.sendChatMessage(this.command);
+    }
+
+    private static boolean isKeyTriggered(long hndl, InputUtil.Key key) {
+        if (key.getCategory() == InputUtil.Type.MOUSE)
+            return GLFW.glfwGetMouseButton(hndl, key.getCode()) == 1;
+        else return GLFW.glfwGetKey(hndl, key.getCode()) == 1;
     }
 }

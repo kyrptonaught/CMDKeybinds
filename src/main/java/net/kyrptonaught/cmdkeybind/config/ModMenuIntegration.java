@@ -17,9 +17,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
-import java.util.Optional;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
 public class ModMenuIntegration implements ModMenuApi {

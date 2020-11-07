@@ -5,7 +5,6 @@ import me.shedaniel.clothconfig2.gui.entries.TooltipListEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
@@ -26,7 +25,7 @@ public class ButtonEntry extends TooltipListEntry<String> {
             click.accept(this);
         });
         this.resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(new TranslatableText("text.cloth-config.reset_value")) + 6, 20, new TranslatableText("text.cloth-config.reset_value"), widget -> {
-        getConfigScreen().setEdited(true);
+            getConfigScreen().setEdited(true);
         });
 
         this.widgets = Lists.newArrayList(buttonWidget, resetButton);
@@ -34,7 +33,7 @@ public class ButtonEntry extends TooltipListEntry<String> {
 
     @Override
     public void render(MatrixStack matrices, int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean isSelected, float delta) {
-        super.render(matrices,index, y, x, entryWidth, entryHeight, mouseX, mouseY, isSelected, delta);
+        super.render(matrices, index, y, x, entryWidth, entryHeight, mouseX, mouseY, isSelected, delta);
         Window window = MinecraftClient.getInstance().getWindow();
         this.buttonWidget.active = isEditable();
         this.buttonWidget.y = y;
@@ -45,11 +44,11 @@ public class ButtonEntry extends TooltipListEntry<String> {
             this.buttonWidget.x = x + resetButton.getWidth() + 2;
             this.buttonWidget.setWidth(150 - resetButton.getWidth() - 2);
         } else {
-            MinecraftClient.getInstance().textRenderer.draw(matrices,getFieldName(), x, y + 5, 16777215);
+            MinecraftClient.getInstance().textRenderer.draw(matrices, getFieldName(), x, y + 5, 16777215);
             this.buttonWidget.x = x + entryWidth - 150;
             this.buttonWidget.setWidth(150 - resetButton.getWidth() - 2);
         }
-        buttonWidget.render(matrices,mouseX, mouseY, delta);
+        buttonWidget.render(matrices, mouseX, mouseY, delta);
     }
 
     @Override

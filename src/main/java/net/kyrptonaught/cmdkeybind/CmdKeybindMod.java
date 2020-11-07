@@ -2,7 +2,6 @@ package net.kyrptonaught.cmdkeybind;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.kyrptonaught.cmdkeybind.MacroTypes.*;
 import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
 import net.kyrptonaught.kyrptconfig.config.ConfigManager;
@@ -19,7 +18,6 @@ public class CmdKeybindMod implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-
         config.load();
         if (getConfig().macros.size() == 0) addEmptyMacro();
         buildMacros();
