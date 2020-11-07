@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.4.2",
+  "version": "1.5.1-1.16",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
@@ -25,8 +25,5 @@
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
-  },
-  "custom": {
-    "modmenu:clientsideOnly": true
   }
 }

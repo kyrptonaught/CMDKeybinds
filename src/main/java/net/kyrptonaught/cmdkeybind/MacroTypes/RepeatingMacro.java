@@ -24,11 +24,9 @@ public class RepeatingMacro extends BaseMacro {
     }
 
     private boolean canExecute() {
-
         if (delay > 0) {
             if (sysTimePressed == 0) return true;
             return currentTime - sysTimePressed > delay;
-
         }
         return true;
     }

@@ -1,20 +1,21 @@
 package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 public abstract class BaseMacro {
     public enum MacroType {
-        Delayed, Repeating, SingleUse, DisplayOnly
+        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating
     }
 
-    private InputUtil.KeyCode keyCode, keyMod;
+    private InputUtil.Key keyCode, keyMod;
     protected String command;
 
     BaseMacro(String key, String keyMod, String command) {
-        this.keyCode = InputUtil.fromName(key);
-        this.keyMod = InputUtil.fromName(keyMod);
+        this.keyCode = InputUtil.fromTranslationKey(key);
+        this.keyMod = InputUtil.fromTranslationKey(keyMod);
         this.command = command;
 
     }
@@ -24,15 +25,15 @@ public abstract class BaseMacro {
 
     boolean isTriggered(long hndl) {
         boolean modTriggered = true;
-        if (keyMod.getKeyCode() != -1) {
+        if (keyMod.getCode() != -1) {
             if (keyMod.getCategory() == InputUtil.Type.MOUSE)
-                modTriggered = GLFW.glfwGetMouseButton(hndl, keyMod.getKeyCode()) == 1;
-            else modTriggered = GLFW.glfwGetKey(hndl, keyMod.getKeyCode()) == 1;
+                modTriggered = GLFW.glfwGetMouseButton(hndl, keyMod.getCode()) == 1;
+            else modTriggered = GLFW.glfwGetKey(hndl, keyMod.getCode()) == 1;
         }
 
         if (keyCode.getCategory() == InputUtil.Type.MOUSE)
-            return modTriggered && GLFW.glfwGetMouseButton(hndl, keyCode.getKeyCode()) == 1;
-        return modTriggered && GLFW.glfwGetKey(hndl, keyCode.getKeyCode()) == 1;
+            return modTriggered && GLFW.glfwGetMouseButton(hndl, keyCode.getCode()) == 1;
+        return modTriggered && GLFW.glfwGetKey(hndl, keyCode.getCode()) == 1;
     }
 
     protected void execute(ClientPlayerEntity player) {

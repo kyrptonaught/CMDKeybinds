@@ -1,6 +1,7 @@
 package net.kyrptonaught.cmdkeybind;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.kyrptonaught.cmdkeybind.MacroTypes.*;
 import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
@@ -12,29 +13,29 @@ import java.util.List;
 
 public class CmdKeybindMod implements ClientModInitializer {
     public static final String MOD_ID = "cmdkeybind";
-    public static ConfigManager config = new ConfigManager.SingleConfigManager(MOD_ID);
+    public static ConfigManager.SingleConfigManager config = new ConfigManager.SingleConfigManager(MOD_ID, new ConfigOptions());
 
     public static List<BaseMacro> macros = new ArrayList<>();
 
     @Override
     public void onInitializeClient() {
-        config.registerFile(MOD_ID + "config.json5", new ConfigOptions());
-        config.loadAll();
+
+        config.load();
         if (getConfig().macros.size() == 0) addEmptyMacro();
         buildMacros();
-        ClientTickCallback.EVENT.register(e ->
+        ClientTickEvents.START_WORLD_TICK.register(clientWorld ->
         {
-            if (e.currentScreen == null) {
+            if (MinecraftClient.getInstance().currentScreen == null) {
                 long hndl = MinecraftClient.getInstance().getWindow().getHandle();
                 long curTime = System.currentTimeMillis();
                 for (BaseMacro macro : macros)
-                    macro.tick(hndl, e.player, curTime);
+                    macro.tick(hndl, MinecraftClient.getInstance().player, curTime);
             }
         });
     }
 
     public static ConfigOptions getConfig() {
-        return (ConfigOptions) config.getConfig(MOD_ID + "config.json5");
+        return (ConfigOptions) config.getConfig();
     }
 
     public static void buildMacros() {
@@ -56,6 +57,9 @@ public class CmdKeybindMod implements ClientModInitializer {
                     case DisplayOnly:
                         macros.add(new DisplayMacro(macro.keyName, macro.keyModName, macro.command));
                         break;
+                    case ToggledRepeating:
+                        macros.add(new ToggledRepeating(macro.keyName, macro.keyModName, macro.command, macro.delay));
+                        break;
                 }
             }
     }
@@ -63,6 +67,6 @@ public class CmdKeybindMod implements ClientModInitializer {
     public static void addEmptyMacro() {
         getConfig().macros.add(new ConfigOptions.ConfigMacro());
         buildMacros();
-        config.saveAll();
+        config.save();
     }
 }
