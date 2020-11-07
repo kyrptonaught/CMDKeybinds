@@ -1,0 +1,13 @@
+{
+  "key.cmdkeybind.config.category.main": "目录",
+  "key.cmdkeybind.config.category.macros": "宏",
+  "key.cmdkeybind.config.sub.macro": "宏命令",
+  "key.cmdkeybind.config.macro.key": "按键",
+  "key.cmdkeybind.config.macro.command": "指令",
+  "key.cmdkeybind.config.enabled": "启用",
+  "key.cmdkeybind.config.globalDelay": "全局延迟",
+  "key.cmdkeybind.config.delay": "延迟 (-1 为绕过延迟)",
+  "key.cmdkeybind.config.add": "添加",
+  "key.cmdkeybind.config.remove": "删除此宏",
+  "key.categories.cmdkeybind": "宏"
+}
