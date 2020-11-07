@@ -1,0 +1,13 @@
+{
+  "key.cmdkeybind.config.category.main": "Genel",
+  "key.cmdkeybind.config.sub.macro": "Makro",
+  "key.cmdkeybind.config.macro.key": "Tuş",
+  "key.cmdkeybind.config.macro.keymod": "Değiştirici Tuş",
+  "key.cmdkeybind.config.macro.command": "Komut",
+  "key.cmdkeybind.config.enabled": "Etkin",
+  "key.cmdkeybind.config.macrotype": "Makro Türü",
+  "key.cmdkeybind.config.delay": "Gecikme (SingleUse/DisplayOnly ayarlarını yoksayar)",
+  "key.cmdkeybind.config.add": "Makro Ekle",
+  "key.cmdkeybind.config.remove": "Kaldır",
+  "key.categories.cmdkeybind": "Makrolar"
+}
