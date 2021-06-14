@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "cmdkeybind",
-  "version": "1.5.2-1.16",
+  "version": "1.5.2-1.17",
   "name": "Command Macros",
   "description": "Command Macros!",
   "authors": [
@@ -23,7 +23,9 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
   }
 }
