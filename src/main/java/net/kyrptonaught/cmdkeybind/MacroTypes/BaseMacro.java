@@ -10,7 +10,8 @@ public abstract class BaseMacro {
         Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating
     }
 
-    private InputUtil.Key primaryKey, modifierKey;
+    private final InputUtil.Key primaryKey;
+    private final InputUtil.Key modifierKey;
     protected String command;
 
     BaseMacro(String key, String keyMod, String command) {

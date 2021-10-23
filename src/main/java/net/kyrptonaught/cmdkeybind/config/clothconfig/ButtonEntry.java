@@ -12,15 +12,15 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 public class ButtonEntry extends TooltipListEntry<String> {
 
-    private ButtonWidget buttonWidget, resetButton;
-    private List<Element> widgets;
+    private final ButtonWidget buttonWidget;
+    private final ButtonWidget resetButton;
+    private final List<Element> widgets;
     boolean wasEditied = false;
 
     public ButtonEntry(Text fieldName, Consumer<ButtonEntry> click) {
@@ -57,7 +57,7 @@ public class ButtonEntry extends TooltipListEntry<String> {
 
     @Override
     public List<? extends Selectable> narratables() {
-        return ImmutableList.of(buttonWidget,resetButton);
+        return ImmutableList.of(buttonWidget, resetButton);
     }
 
     @Override

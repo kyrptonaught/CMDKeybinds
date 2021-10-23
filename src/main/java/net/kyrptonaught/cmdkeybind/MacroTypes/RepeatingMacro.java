@@ -3,7 +3,7 @@ package net.kyrptonaught.cmdkeybind.MacroTypes;
 import net.minecraft.client.network.ClientPlayerEntity;
 
 public class RepeatingMacro extends BaseMacro {
-    private int delay;
+    private final int delay;
     private long sysTimePressed = 0;
     private long currentTime;
 
