@@ -23,9 +23,6 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
 
 	modImplementation "net.kyrptonaught:kyrptconfig:${project.kyrptconfig_version}"
 	include "net.kyrptonaught:kyrptconfig:${project.kyrptconfig_version}"

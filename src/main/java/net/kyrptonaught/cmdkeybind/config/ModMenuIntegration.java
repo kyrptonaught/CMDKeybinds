@@ -55,7 +55,6 @@ public class ModMenuIntegration implements ModMenuApi {
         macroSub.addConfigItem(new IntegerItem(new TranslatableText("key.cmdkeybind.config.delay"), macro.delay, 0).setSaveConsumer(val -> macro.delay = val));
         macroSub.addConfigItem(new ButtonItem(new TranslatableText("key.cmdkeybind.config.remove")).setClickEvent(() -> {
             CmdKeybindMod.getConfig().macros.remove(macro);
-            //configSection.removeConfigItem(macroNum + 1);
             configSection.configs.remove(macroSub);
         }));
         return macroSub;
