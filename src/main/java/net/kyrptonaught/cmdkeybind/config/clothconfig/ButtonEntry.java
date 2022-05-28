@@ -10,7 +10,6 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class ButtonEntry extends TooltipListEntry<String> {
         this.buttonWidget = new ButtonWidget(0, 0, 150, 20, fieldName, widget -> {
             click.accept(this);
         });
-        this.resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(new TranslatableText("text.cloth-config.reset_value")) + 6, 20, new TranslatableText("text.cloth-config.reset_value"), widget -> {
+        this.resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(Text.translatable("text.cloth-config.reset_value")) + 6, 20, Text.translatable("text.cloth-config.reset_value"), widget -> {
             wasEditied = true;
         });
 
