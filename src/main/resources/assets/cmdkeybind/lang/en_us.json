@@ -1,4 +1,5 @@
 {
+  "key.cmdkeybind.config.title": "Command Macros",
   "key.cmdkeybind.config.category.main": "Main",
   "key.cmdkeybind.config.sub.macro": "Macro",
   "key.cmdkeybind.config.macro.key": "Key",
@@ -9,5 +10,6 @@
   "key.cmdkeybind.config.delay": "Delay (Ignore for Single/Display)",
   "key.cmdkeybind.config.add": "Add Macro",
   "key.cmdkeybind.config.remove": "Remove",
-  "key.categories.cmdkeybind": "Macros"
+  "key.categories.cmdkeybind": "Macros",
+  "key.cmdkeybind.config.openmacrokeybind": "Open Macro Config Screen"
 }
