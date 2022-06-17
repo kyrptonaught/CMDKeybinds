@@ -43,6 +43,7 @@ public class MacroScreenFactory {
         macroSub.addConfigItem(new KeybindItem(new TranslatableText("key.cmdkeybind.config.macro.keymod"), macro.keyModName, InputUtil.UNKNOWN_KEY.getTranslationKey()).setSaveConsumer(key -> macro.keyModName = key));
         macroSub.addConfigItem(new EnumItem<>(new TranslatableText("key.cmdkeybind.config.macrotype"), BaseMacro.MacroType.values(), macro.macroType, BaseMacro.MacroType.SingleUse).setSaveConsumer(val -> macro.macroType = val));
         macroSub.addConfigItem(new IntegerItem(new TranslatableText("key.cmdkeybind.config.delay"), macro.delay, 0).setSaveConsumer(val -> macro.delay = val));
+        macroSub.addConfigItem(new IntegerItem(new TranslatableText("key.cmdkeybind.config.times"), macro.times, 1).setSaveConsumer(val -> macro.times = val));
         macroSub.addConfigItem(new ButtonItem(new TranslatableText("key.cmdkeybind.config.remove")).setClickEvent(() -> {
             CmdKeybindMod.getConfig().macros.remove(macro);
             configSection.configs.remove(macroSub);
