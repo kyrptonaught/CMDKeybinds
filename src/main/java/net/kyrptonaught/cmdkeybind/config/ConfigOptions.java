@@ -31,6 +31,8 @@ public class ConfigOptions implements AbstractConfigFile {
         public BaseMacro.MacroType macroType;
         @Comment("Delay(Milliseconds) used for the delay type.")
         public int delay;
+        @Comment("Number of repeats used for the RepeatN type.")
+        public int times;
 
 
         public ConfigMacro() {
@@ -39,6 +41,7 @@ public class ConfigOptions implements AbstractConfigFile {
             this.command = "/say Command Macros!";
             macroType = BaseMacro.MacroType.SingleUse;
             this.delay = 0;
+            this.times = 1;
         }
     }
 }
