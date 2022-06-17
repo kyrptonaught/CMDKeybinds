@@ -4,8 +4,8 @@ import net.minecraft.client.network.ClientPlayerEntity;
 
 public class RepeatN extends BaseMacro {
     private final int delay;
-	private final int times;
-	private int count;
+    private final int times;
+    private int count;
     private long sysTimePressed = 0;
     private long currentTime;
     private boolean wasTriggered;
@@ -13,26 +13,26 @@ public class RepeatN extends BaseMacro {
     public RepeatN(String key, String keyMod, String command, int delay, int times) {
         super(key, keyMod, command);
         this.delay = delay;
-		this.times = times;
+        this.times = times;
     }
 
     @Override
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {
         this.currentTime = currentTime;
         if (isTriggered(hndl)) {
-			wasTriggered = true;
-			count = 0;
-			if (canExecute()) {
-				execute(player);
-				count = 1;
-			}
-		} else if (wasTriggered) {
-			if (count > times)
-				wasTriggered = false;
-			else if (canExecute()) {
-				execute(player);
-				count++;
-			}
+            wasTriggered = true;
+            count = 0;
+            if (canExecute()) {
+                execute(player);
+                count = 1;
+            }
+        } else if (wasTriggered) {
+            if (count > times)
+                wasTriggered = false;
+            else if (canExecute()) {
+                execute(player);
+                count++;
+            }
         } else {
             sysTimePressed = 0;
         }
