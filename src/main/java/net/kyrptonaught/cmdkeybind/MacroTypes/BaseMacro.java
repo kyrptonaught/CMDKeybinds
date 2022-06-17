@@ -7,7 +7,7 @@ import org.lwjgl.glfw.GLFW;
 
 public abstract class BaseMacro {
     public enum MacroType {
-        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating
+        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating, RepeatN
     }
 
     private final InputUtil.Key primaryKey;
