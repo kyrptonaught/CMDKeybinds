@@ -52,7 +52,13 @@ public abstract class BaseMacro {
     }
 
     protected void execute(ClientPlayerEntity player) {
-        player.sendChatMessage(this.command);
+        String command = this.command;
+        if (command.startsWith("/")) {
+            command = command.substring(1);
+            player.sendCommand(command);
+        } else {
+            player.sendChatMessage(command);
+        }
     }
 
     private static boolean isKeyTriggered(long hndl, InputUtil.Key key) {
