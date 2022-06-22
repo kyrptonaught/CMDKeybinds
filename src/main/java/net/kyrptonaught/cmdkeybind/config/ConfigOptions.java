@@ -1,9 +1,13 @@
 package net.kyrptonaught.cmdkeybind.config;
 
 import blue.endless.jankson.Comment;
+import blue.endless.jankson.JsonElement;
+import blue.endless.jankson.api.DeserializationException;
 import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
 import net.kyrptonaught.cmdkeybind.MacroTypes.BaseMacro;
 import net.kyrptonaught.kyrptconfig.config.AbstractConfigFile;
+import net.kyrptonaught.kyrptconfig.config.CustomMarshaller;
+import net.kyrptonaught.kyrptconfig.config.CustomSerializable;
 import net.kyrptonaught.kyrptconfig.keybinding.CustomKeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -20,7 +24,7 @@ public class ConfigOptions implements AbstractConfigFile {
 
     public List<ConfigMacro> macros = new ArrayList<>();
 
-    public static class ConfigMacro {
+    public static class ConfigMacro implements CustomSerializable {
         @Comment("Macro keybinding")
         public String keyName;
         @Comment("Key modifier")
@@ -37,8 +41,21 @@ public class ConfigOptions implements AbstractConfigFile {
             this.keyName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_KP_0).getTranslationKey();
             this.keyModName = InputUtil.Type.KEYSYM.createFromCode(GLFW.GLFW_KEY_UNKNOWN).getTranslationKey();
             this.command = "/say Command Macros!";
-            macroType = BaseMacro.MacroType.SingleUse;
+            this.macroType = BaseMacro.MacroType.SingleUse;
             this.delay = 0;
+        }
+
+        @Override
+        public boolean shouldSerializeField(String field) {
+            if (field.equals("delay"))
+                return macroType.isDelayApplicable();
+            return true;
+        }
+
+        @Override
+        public CustomSerializable fromJson(CustomMarshaller m, JsonElement obj, Class<CustomSerializable> clazz) throws DeserializationException {
+            //System.out.println(CmdKeybindMod.getConfig().macros.get(0));
+            return m.marshallNonCustom(clazz, obj, false);
         }
     }
 }
