@@ -10,7 +10,6 @@ import net.kyrptonaught.cmdkeybind.MacroTypes.*;
 import net.kyrptonaught.cmdkeybind.config.ConfigOptions;
 import net.kyrptonaught.cmdkeybind.config.MacroScreenFactory;
 import net.kyrptonaught.kyrptconfig.config.ConfigManager;
-import net.kyrptonaught.kyrptconfig.config.CustomSerializer;
 import net.kyrptonaught.kyrptconfig.keybinding.DisplayOnlyKeyBind;
 import net.minecraft.client.MinecraftClient;
 

@@ -3,7 +3,9 @@ package net.kyrptonaught.cmdkeybind.config;
 import net.kyrptonaught.cmdkeybind.CmdKeybindMod;
 import net.kyrptonaught.kyrptconfig.config.screen.ConfigScreen;
 import net.kyrptonaught.kyrptconfig.config.screen.ConfigSection;
-import net.kyrptonaught.kyrptconfig.config.screen.items.*;
+import net.kyrptonaught.kyrptconfig.config.screen.items.BooleanItem;
+import net.kyrptonaught.kyrptconfig.config.screen.items.ButtonItem;
+import net.kyrptonaught.kyrptconfig.config.screen.items.KeybindItem;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
