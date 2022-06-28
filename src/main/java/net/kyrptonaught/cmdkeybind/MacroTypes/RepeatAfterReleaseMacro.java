@@ -2,7 +2,7 @@ package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 
-public class RepeatN extends BaseMacro {
+public class RepeatAfterReleaseMacro extends BaseMacro {
     private final int delay;
     private final int times;
     private int count;
@@ -10,7 +10,7 @@ public class RepeatN extends BaseMacro {
     private long currentTime;
     private boolean wasTriggered;
 
-    public RepeatN(String key, String keyMod, String command, int delay, int times) {
+    public RepeatAfterReleaseMacro(String key, String keyMod, String command, int delay, int times) {
         super(key, keyMod, command);
         this.delay = delay;
         this.times = times;

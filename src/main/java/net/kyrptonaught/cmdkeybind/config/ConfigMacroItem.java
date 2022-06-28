@@ -19,6 +19,9 @@ public class ConfigMacroItem extends SubItem<ConfigOptions.ConfigMacro> {
         KeybindItem keymodItem = (KeybindItem) addConfigItem(new KeybindItem(Text.translatable("key.cmdkeybind.config.macro.keymod"), macro.keyModName, InputUtil.UNKNOWN_KEY.getTranslationKey()).setSaveConsumer(key -> macro.keyModName = key));
         EnumItem<BaseMacro.MacroType> macroType = (EnumItem<BaseMacro.MacroType>) addConfigItem(new EnumItem<>(Text.translatable("key.cmdkeybind.config.macrotype"), BaseMacro.MacroType.values(), macro.macroType, BaseMacro.MacroType.SingleUse).setSaveConsumer(val -> macro.macroType = val));
         IntegerItem delayItem = (IntegerItem) addConfigItem(new IntegerItem(Text.translatable("key.cmdkeybind.config.delay"), macro.delay, 0).setSaveConsumer(val -> macro.delay = val));
+
+        IntegerItem repetitionsItem = (IntegerItem) addConfigItem(new IntegerItem(Text.translatable("key.cmdkeybind.config.repetitions"), macro.repetitions, 1).setSaveConsumer(val -> macro.repetitions = val));
+
         addConfigItem(new ButtonItem(Text.translatable("key.cmdkeybind.config.remove")).setClickEvent(() -> {
             CmdKeybindMod.getConfig().macros.remove(macro);
             configSection.configs.remove(this);
@@ -26,8 +29,12 @@ public class ConfigMacroItem extends SubItem<ConfigOptions.ConfigMacro> {
 
         command.setValueUpdatedEvent(value -> setTitleText(Text.literal(value)));
         keyItem.setValueUpdatedEvent(value -> setToolTip(Text.literal(value)));
-        macroType.setValueUpdatedEvent(value -> delayItem.setHidden(!value.isDelayApplicable()));
+        macroType.setValueUpdatedEvent(value -> {
+            delayItem.setHidden(!value.isDelayApplicable());
+            repetitionsItem.setHidden(!value.isRepetitionsApplicable());
+        });
 
         delayItem.setHidden(!macro.macroType.isDelayApplicable());
+        repetitionsItem.setHidden(!macro.macroType.isRepetitionsApplicable());
     }
 }

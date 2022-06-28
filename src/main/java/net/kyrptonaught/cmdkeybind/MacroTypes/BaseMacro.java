@@ -7,13 +7,17 @@ import org.lwjgl.glfw.GLFW;
 
 public abstract class BaseMacro {
     public enum MacroType {
-        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating, RepeatAfterRelease
+        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating, RepeatAfterRelease;
 
         public boolean isDelayApplicable() {
             return switch (this) {
-                case Repeating, ToggledRepeating, Delayed -> true;
+                case Repeating, ToggledRepeating, Delayed, RepeatAfterRelease -> true;
                 default -> false;
             };
+        }
+
+        public boolean isRepetitionsApplicable() {
+            return this == RepeatAfterRelease;
         }
     }
 
