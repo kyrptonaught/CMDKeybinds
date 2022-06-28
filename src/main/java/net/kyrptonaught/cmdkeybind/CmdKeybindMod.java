@@ -2,7 +2,8 @@ package net.kyrptonaught.cmdkeybind;
 
 import com.mojang.brigadier.Command;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.kyrptonaught.cmdkeybind.MacroTypes.*;
@@ -39,15 +40,16 @@ public class CmdKeybindMod implements ClientModInitializer {
             }
         });
 
-        ClientCommandManager.DISPATCHER.register(
-                ClientCommandManager.literal("cmdkeybinds")
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) ->
+                dispatcher.register(ClientCommandManager.literal("cmdkeybinds")
                         .then(ClientCommandManager.literal("showconfig")
                                 .executes(context -> {
                                     //Semi hacky solution to get the screen to open. This workaround avoids a mixin.
                                     //The chat window auto closes any open screen after command execution. Opening a screen would immediately close it.
                                     MinecraftClient.getInstance().setOverlay(new ForceScreenOpenerOverlay(MinecraftClient.getInstance(), MacroScreenFactory.buildScreen(null)));
                                     return Command.SINGLE_SUCCESS;
-                                })));
+                                }))));
+
         KeyBindingHelper.registerKeyBinding(new DisplayOnlyKeyBind(
                 "key.cmdkeybind.config.openmacrokeybind",
                 "key.cmdkeybind.config.title",
