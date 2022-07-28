@@ -68,7 +68,7 @@ public abstract class BaseMacro {
             command = command.substring(1);
             player.sendCommand(command);
         } else {
-            player.sendChatMessage(command);
+            player.sendChatMessage(command, null);
         }
     }
 

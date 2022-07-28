@@ -16,6 +16,7 @@ repositories {
 	maven { url "https://maven.kyrptonaught.dev"}
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/releases"}
+	mavenLocal()
 }
 
 dependencies {
@@ -24,8 +25,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "net.kyrptonaught:kyrptconfig:1.4.9-1.19"
-	include "net.kyrptonaught:kyrptconfig:1.4.9-1.19"
+	modImplementation "net.kyrptonaught:kyrptconfig:${project.kyrptconfig}"
+	include "net.kyrptonaught:kyrptconfig:${project.kyrptconfig}"
 }
 
 processResources {
