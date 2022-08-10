@@ -2,43 +2,45 @@ package net.kyrptonaught.cmdkeybind.MacroTypes;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 
-public class RepeatAfterReleaseMacro extends BaseMacro {
+public class RunNTimesMacro extends BaseMacro {
     private final int delay;
-    private final int times;
-    private int count;
     private long sysTimePressed = 0;
     private long currentTime;
-    private boolean wasTriggered;
 
-    public RepeatAfterReleaseMacro(String key, String keyMod, String command, int delay, int times) {
+    private final int totalRuns;
+    private int runsLeft = 0;
+    private boolean isRepeating = false;
+
+    public RunNTimesMacro(String key, String keyMod, String command, int delay, int totalRuns) {
         super(key, keyMod, command);
         this.delay = delay;
-        this.times = times;
+        this.totalRuns = totalRuns;
     }
 
     @Override
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {
         this.currentTime = currentTime;
-        if (isTriggered(hndl)) {
-            wasTriggered = true;
-            count = 0;
-            if (canExecute()) {
-                execute(player);
-                count = 1;
-            }
-        } else if (wasTriggered) {
-            if (count > times)
-                wasTriggered = false;
-            else if (canExecute()) {
-                execute(player);
-                count++;
-            }
-        } else {
+
+        if (!isRepeating && wasPressed()) {
+            isRepeating = true;
+            runsLeft = totalRuns;
             sysTimePressed = 0;
         }
+
+        if (isRepeating) {
+            if (canExecute()) {
+                if (runsLeft > 0) {
+                    execute(player);
+                    runsLeft--;
+                } else if (!wasPressed) {
+                    isRepeating = false;
+                }
+            }
+        }
+        super.tick(hndl, player, currentTime);
     }
 
-    private boolean canExecute() {
+    protected boolean canExecute() {
         if (delay > 0) {
             if (sysTimePressed == 0) return true;
             return currentTime - sysTimePressed > delay;

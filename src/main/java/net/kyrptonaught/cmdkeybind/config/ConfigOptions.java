@@ -28,11 +28,11 @@ public class ConfigOptions implements AbstractConfigFile {
         public String keyModName;
         @Comment("Command to execute")
         public String command;
-        @Comment("Type of Macro. Delayed, Repeating, SingleUse, DisplayOnly")
+        @Comment("Type of Macro. Delayed, Repeating, RunNTimes, SingleUse, DisplayOnly")
         public BaseMacro.MacroType macroType;
-        @Comment("Delay(Milliseconds) used for the delay type.")
+        @Comment("Delay(Milliseconds) used for the Delayed/Repeating/RunNTimes macro.")
         public int delay;
-        @Comment("Number of repeats used for the RepeatAfterRelease type.")
+        @Comment("Number of repeats used for the RunNTimes macro.")
         public int repetitions;
 
 

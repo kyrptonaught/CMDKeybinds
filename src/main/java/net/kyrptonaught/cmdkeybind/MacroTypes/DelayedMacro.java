@@ -20,7 +20,6 @@ public class DelayedMacro extends BaseMacro {
         }
         if (delayed())
             execute(player);
-
     }
 
     private boolean canExecute() {

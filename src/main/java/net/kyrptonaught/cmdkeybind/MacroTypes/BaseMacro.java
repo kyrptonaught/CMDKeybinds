@@ -7,23 +7,24 @@ import org.lwjgl.glfw.GLFW;
 
 public abstract class BaseMacro {
     public enum MacroType {
-        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating, RepeatAfterRelease;
+        Delayed, Repeating, SingleUse, DisplayOnly, ToggledRepeating, RunNTimes;
 
         public boolean isDelayApplicable() {
             return switch (this) {
-                case Repeating, ToggledRepeating, Delayed, RepeatAfterRelease -> true;
+                case Repeating, ToggledRepeating, Delayed, RunNTimes -> true;
                 default -> false;
             };
         }
 
         public boolean isRepetitionsApplicable() {
-            return this == RepeatAfterRelease;
+            return this == RunNTimes;
         }
     }
 
     private final InputUtil.Key primaryKey;
     private final InputUtil.Key modifierKey;
     protected String command;
+    protected boolean wasPressed = false;
 
     BaseMacro(String key, String keyMod, String command) {
         this.primaryKey = InputUtil.fromTranslationKey(key);
@@ -33,6 +34,7 @@ public abstract class BaseMacro {
     }
 
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {
+        wasPressed = isTriggered(hndl);
     }
 
     public boolean isDupeKeyModPressed(long hndl, InputUtil.Key testKey) {
@@ -60,6 +62,10 @@ public abstract class BaseMacro {
             }
         }
         return false;
+    }
+
+    protected boolean wasPressed() {
+        return wasPressed;
     }
 
     protected void execute(ClientPlayerEntity player) {

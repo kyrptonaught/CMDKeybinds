@@ -75,7 +75,7 @@ public class CmdKeybindMod implements ClientModInitializer {
                     case SingleUse -> macros.add(new SingleMacro(macro.keyName, macro.keyModName, macro.command));
                     case DisplayOnly -> macros.add(new DisplayMacro(macro.keyName, macro.keyModName, macro.command));
                     case ToggledRepeating -> macros.add(new ToggledRepeating(macro.keyName, macro.keyModName, macro.command, macro.delay));
-                    case RepeatAfterRelease -> macros.add(new RepeatAfterReleaseMacro(macro.keyName, macro.keyModName, macro.command, macro.delay, macro.repetitions));
+                    case RunNTimes -> macros.add(new RunNTimesMacro(macro.keyName, macro.keyModName, macro.command, macro.delay, macro.repetitions));
                 }
             }
     }
