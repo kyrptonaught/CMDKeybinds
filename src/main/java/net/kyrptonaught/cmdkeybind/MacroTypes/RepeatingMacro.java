@@ -14,8 +14,9 @@ public class RepeatingMacro extends BaseMacro {
 
     @Override
     public void tick(long hndl, ClientPlayerEntity player, long currentTime) {
+        super.tick(hndl, player, currentTime);
         this.currentTime = currentTime;
-        if (isTriggered(hndl)) {
+        if (wasPressed()) {
             if (canExecute())
                 execute(player);
         } else {
@@ -23,7 +24,7 @@ public class RepeatingMacro extends BaseMacro {
         }
     }
 
-    private boolean canExecute() {
+    protected boolean canExecute() {
         if (delay > 0) {
             if (sysTimePressed == 0) return true;
             return currentTime - sysTimePressed > delay;
