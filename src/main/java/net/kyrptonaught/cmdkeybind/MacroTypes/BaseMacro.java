@@ -72,9 +72,9 @@ public abstract class BaseMacro {
         String command = this.command;
         if (command.startsWith("/")) {
             command = command.substring(1);
-            player.sendCommand(command);
+            player.networkHandler.sendCommand(command);
         } else {
-            player.sendChatMessage(command, null);
+            player.networkHandler.sendChatMessage(command);
         }
     }
 
