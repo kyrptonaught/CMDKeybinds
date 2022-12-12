@@ -69,13 +69,7 @@ public abstract class BaseMacro {
     }
 
     protected void execute(ClientPlayerEntity player) {
-        String command = this.command;
-        if (command.startsWith("/")) {
-            command = command.substring(1);
-            player.networkHandler.sendCommand(command);
-        } else {
-            player.networkHandler.sendChatMessage(command);
-        }
+        CmdKeybindMod.executeCommand(player, this.command);
     }
 
     private static boolean isKeyTriggered(long hndl, InputUtil.Key key) {

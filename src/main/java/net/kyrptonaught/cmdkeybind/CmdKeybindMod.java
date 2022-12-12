@@ -12,6 +12,7 @@ import net.kyrptonaught.cmdkeybind.config.MacroScreenFactory;
 import net.kyrptonaught.kyrptconfig.config.ConfigManager;
 import net.kyrptonaught.kyrptconfig.keybinding.DisplayOnlyKeyBind;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +59,17 @@ public class CmdKeybindMod implements ClientModInitializer {
         ));
     }
 
-
     public static ConfigOptions getConfig() {
         return (ConfigOptions) config.getConfig();
+    }
+
+    public static void executeCommand(ClientPlayerEntity player, String command){
+        if (command.startsWith("/")) {
+            command = command.substring(1);
+            player.networkHandler.sendCommand(command);
+        } else {
+            player.networkHandler.sendChatMessage(command);
+        }
     }
 
     public static void buildMacros() {
