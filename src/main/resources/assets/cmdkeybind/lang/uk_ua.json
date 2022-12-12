@@ -1,0 +1,15 @@
+{
+  "key.cmdkeybind.config.title": "Command Macros",
+  "key.cmdkeybind.config.category.main": "Головна",
+  "key.cmdkeybind.config.sub.macro": "Макрос",
+  "key.cmdkeybind.config.macro.key": "Клавіша",
+  "key.cmdkeybind.config.macro.keymod": "Клавіша-модифікатор",
+  "key.cmdkeybind.config.macro.command": "Команда",
+  "key.cmdkeybind.config.enabled": "Увімкнено",
+  "key.cmdkeybind.config.macrotype": "Тип Макросу",
+  "key.cmdkeybind.config.delay": "Затримка (Ігнорувати якщо Єдиний/Відображення)",
+  "key.cmdkeybind.config.add": "Додати Макрос",
+  "key.cmdkeybind.config.remove": "Видалити",
+  "key.categories.cmdkeybind": "Макроси",
+  "key.cmdkeybind.config.openmacrokeybind": "Відкрити Налаштування Макросів"
+}
