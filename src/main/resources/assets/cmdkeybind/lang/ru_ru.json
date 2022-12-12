@@ -1,13 +1,16 @@
 {
-  "key.cmdkeybind.config.category.main": "Main",
-  "key.cmdkeybind.config.sub.macro": "Macro",
+  "key.cmdkeybind.config.title": "Command Macros",
+  "key.cmdkeybind.config.category.main": "Основное",
+  "key.cmdkeybind.config.sub.macro": "Макрос",
   "key.cmdkeybind.config.macro.key": "Клавиша",
-  "key.cmdkeybind.config.macro.keymod": "Клавиша модификатор",
+  "key.cmdkeybind.config.macro.keymod": "Клавиша-модификатор",
   "key.cmdkeybind.config.macro.command": "Команда",
   "key.cmdkeybind.config.enabled": "Включено",
-  "key.cmdkeybind.config.macrotype": "Вид макроса",
-  "key.cmdkeybind.config.delay": "Задержка (Не используется для Single/Display)",
+  "key.cmdkeybind.config.macrotype": "Тип макроса",
+  "key.cmdkeybind.config.delay": "Задержка (Миллисекунд)",
+  "key.cmdkeybind.config.repetitions": "Периодичность повторения",
   "key.cmdkeybind.config.add": "Добавить макрос",
-  "key.cmdkeybind.config.remove": "Удалить",
-  "key.categories.cmdkeybind": "Macros"
+  "key.cmdkeybind.config.remove": "Убрать",
+  "key.categories.cmdkeybind": "Макрос",
+  "key.cmdkeybind.config.openmacrokeybind": "Открыть экран настроек Macro"
 }
