@@ -66,7 +66,7 @@ public class CmdKeybindMod implements ClientModInitializer {
     public static void executeCommand(ClientPlayerEntity player, String command){
         if (command.startsWith("/")) {
             command = command.substring(1);
-            player.networkHandler.sendCommand(command);
+            player.networkHandler.sendChatCommand(command);
         } else {
             player.networkHandler.sendChatMessage(command);
         }
