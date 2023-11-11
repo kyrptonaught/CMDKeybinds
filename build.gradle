@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'fabric-loom' version '1.4-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -29,7 +29,7 @@ dependencies {
 	include "net.kyrptonaught:kyrptconfig:${project.kyrptconfig}"
 
 	//update modmenu when kyrptconfig is pulling old version
-	modImplementation ("com.terraformersmc:modmenu:7.0.1") { exclude group: "net.fabricmc.fabric-api" }
+	modImplementation ("com.terraformersmc:modmenu:8.0.0") { exclude group: "net.fabricmc.fabric-api" }
 }
 
 processResources {
